@@ -15,7 +15,7 @@ This task restores consistency between Beads issue state and ExecPlan documents.
 - [x] (2026-02-09 19:04Z) Audited closed plans using subagents; identified stale unchecked entries in all existing plan files and pending markers in verification/doc plans.
 - [x] (2026-02-09 19:04Z) Applied scripted bulk backfill updates across 19 closed ExecPlan files, including checkbox/pending-marker cleanup and revision-note evidence lines.
 - [x] (2026-02-09 19:05Z) Validated cleanup with ripgrep: no stale unchecked or pending closure markers remain in closed issue plans.
-- [ ] Commit issue-scoped files, comment with commit hash, close issue, and sync Beads state.
+- [x] (2026-02-09 19:06Z) Committed issue-scoped files (`ca727e36`), commented progress in Beads, closed `bd-2oz`, and flushed Beads sync state.
 
 ## Surprises & Discoveries
 
@@ -37,11 +37,11 @@ This task restores consistency between Beads issue state and ExecPlan documents.
 
 ## Outcomes & Retrospective
 
-Completed outcome so far:
+Completed outcome:
 
 1. Closed ExecPlans were backfilled to align with actual issue closure state.
 2. Stale unchecked closure steps and pending artifact markers were removed from closed plans.
-3. Remaining work is issue `bd-2oz` commit/comment/close/sync.
+3. Issue `bd-2oz` commit/comment/close/sync workflow is complete.
 
 ## Context and Orientation
 
@@ -109,3 +109,4 @@ No runtime code or public interfaces change. This issue modifies documentation/p
 
 Revision Note (2026-02-09 19:04Z, Codex): Initial ExecPlan created because this process cleanup issue had no existing ExecPlan path.
 Revision Note (2026-02-09 19:05Z, Codex): Updated progress and outcomes after scripted backfill of 19 closed ExecPlans and post-cleanup validation.
+Revision Note (2026-02-09 19:06Z, Codex): Finalized this plan after commit `ca727e36` and Beads close/sync completion.
