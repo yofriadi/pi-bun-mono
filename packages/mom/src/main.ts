@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 import { join, resolve } from "path";
-import { type AgentRunner, getOrCreateRunner } from "./agent.js";
-import { downloadChannel } from "./download.js";
-import { createEventsWatcher } from "./events.js";
-import * as log from "./log.js";
-import { parseSandboxArg, type SandboxConfig, validateSandbox } from "./sandbox.js";
-import { type MomHandler, type SlackBot, SlackBot as SlackBotClass, type SlackEvent } from "./slack.js";
-import { ChannelStore } from "./store.js";
+import { type AgentRunner, getOrCreateRunner } from "./agent";
+import { downloadChannel } from "./download";
+import { createEventsWatcher } from "./events";
+import * as log from "./log";
+import { parseSandboxArg, type SandboxConfig, validateSandbox } from "./sandbox";
+import { type MomHandler, type SlackBot, SlackBot as SlackBotClass, type SlackEvent } from "./slack";
+import { ChannelStore } from "./store";
 
 // ============================================================================
 // Config

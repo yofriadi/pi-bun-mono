@@ -3,10 +3,10 @@ import { spawn } from "child_process";
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { getActivePod, loadConfig, saveConfig } from "../config.js";
-import { getModelConfig, getModelName, isKnownModel } from "../model-configs.js";
-import { sshExec } from "../ssh.js";
-import type { Pod } from "../types.js";
+import { getActivePod, loadConfig, saveConfig } from "../config";
+import { getModelConfig, getModelName, isKnownModel } from "../model-configs";
+import { sshExec } from "../ssh";
+import type { Pod } from "../types";
 
 /**
  * Get the pod to use (active or override)

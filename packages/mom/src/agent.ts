@@ -16,12 +16,12 @@ import { existsSync, readFileSync } from "fs";
 import { mkdir, writeFile } from "fs/promises";
 import { homedir } from "os";
 import { join } from "path";
-import { MomSettingsManager, syncLogToSessionManager } from "./context.js";
-import * as log from "./log.js";
-import { createExecutor, type SandboxConfig } from "./sandbox.js";
-import type { ChannelInfo, SlackContext, UserInfo } from "./slack.js";
-import type { ChannelStore } from "./store.js";
-import { createMomTools, setUploadFunction } from "./tools/index.js";
+import { MomSettingsManager, syncLogToSessionManager } from "./context";
+import * as log from "./log";
+import { createExecutor, type SandboxConfig } from "./sandbox";
+import type { ChannelInfo, SlackContext, UserInfo } from "./slack";
+import type { ChannelStore } from "./store";
+import { createMomTools, setUploadFunction } from "./tools/index";
 
 // Hardcoded model for now - TODO: make configurable (issue #63)
 const model = getModel("anthropic", "claude-sonnet-4-5");
