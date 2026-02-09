@@ -1,6 +1,6 @@
 import type { AgentTool } from "@mariozechner/pi-agent-core";
 import { type Static, Type } from "@sinclair/typebox";
-import { mkdir as fsMkdir, writeFile as fsWriteFile } from "fs/promises";
+import { mkdir as fsMkdir } from "fs/promises";
 import { dirname } from "path";
 import { resolveToCwd } from "./path-utils";
 
@@ -23,7 +23,9 @@ export interface WriteOperations {
 }
 
 const defaultWriteOperations: WriteOperations = {
-	writeFile: (path, content) => fsWriteFile(path, content, "utf-8"),
+	writeFile: async (path, content) => {
+		await Bun.write(path, content);
+	},
 	mkdir: (dir) => fsMkdir(dir, { recursive: true }).then(() => {}),
 };
 

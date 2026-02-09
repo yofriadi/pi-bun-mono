@@ -2,7 +2,7 @@ import type { AgentTool } from "@mariozechner/pi-agent-core";
 import type { ImageContent, TextContent } from "@mariozechner/pi-ai";
 import { type Static, Type } from "@sinclair/typebox";
 import { constants } from "fs";
-import { access as fsAccess, readFile as fsReadFile } from "fs/promises";
+import { access as fsAccess } from "fs/promises";
 import { formatDimensionNote, resizeImage } from "../../utils/image-resize";
 import { detectSupportedImageMimeTypeFromFile } from "../../utils/mime";
 import { resolveReadPath } from "./path-utils";
@@ -34,7 +34,7 @@ export interface ReadOperations {
 }
 
 const defaultReadOperations: ReadOperations = {
-	readFile: (path) => fsReadFile(path),
+	readFile: async (path) => Buffer.from(await Bun.file(path).arrayBuffer()),
 	access: (path) => fsAccess(path, constants.R_OK),
 	detectImageMimeType: detectSupportedImageMimeTypeFromFile,
 };
