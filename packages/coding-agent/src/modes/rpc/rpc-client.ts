@@ -105,7 +105,7 @@ export class RpcClient {
 		});
 
 		// Wait a moment for process to initialize
-		await new Promise((resolve) => setTimeout(resolve, 100));
+		await Bun.sleep(100);
 
 		if (this.process.exitCode !== null) {
 			throw new Error(`Agent process exited immediately with code ${this.process.exitCode}. Stderr: ${this.stderr}`);

@@ -266,7 +266,7 @@ WRAPPER
 	console.log("Streaming logs... (waiting for startup)\n");
 
 	// Small delay to ensure log file is created
-	await new Promise((resolve) => setTimeout(resolve, 500));
+	await Bun.sleep(500);
 
 	// Stream logs with color support, watching for startup complete
 	const sshParts = pod.ssh.split(" ");

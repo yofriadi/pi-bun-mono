@@ -107,7 +107,7 @@ async function startCallbackServer(): Promise<CallbackServerInfo> {
 					cancelled = true;
 				},
 				waitForCode: async () => {
-					const sleep = () => new Promise((r) => setTimeout(r, 100));
+					const sleep = () => Bun.sleep(100);
 					while (!result && !cancelled) {
 						await sleep();
 					}
@@ -169,7 +169,7 @@ interface GoogleRpcErrorResponse {
  * Wait helper for onboarding retries
  */
 function wait(ms: number): Promise<void> {
-	return new Promise((resolve) => setTimeout(resolve, ms));
+	return Bun.sleep(ms);
 }
 
 /**

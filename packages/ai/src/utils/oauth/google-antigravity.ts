@@ -115,7 +115,7 @@ async function startCallbackServer(): Promise<CallbackServerInfo> {
 					cancelled = true;
 				},
 				waitForCode: async () => {
-					const sleep = () => new Promise((r) => setTimeout(r, 100));
+					const sleep = () => Bun.sleep(100);
 					while (!result && !cancelled) {
 						await sleep();
 					}

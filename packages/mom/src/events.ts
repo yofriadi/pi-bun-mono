@@ -370,7 +370,7 @@ export class EventsWatcher {
 	}
 
 	private sleep(ms: number): Promise<void> {
-		return new Promise((resolve) => setTimeout(resolve, ms));
+		return Bun.sleep(ms);
 	}
 }
 
