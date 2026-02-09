@@ -43,6 +43,16 @@ Also keep these areas unchanged unless clearly required for compatibility:
 - Semantics-sensitive path/temp/home handling.
 - Existing CLI flags/defaults/prompts/auth/session behavior.
 
+## Package Boundary Note: web-ui
+
+`packages/web-ui` remains Node/Vite scoped for now and is not part of the Bun runtime migration surface for CLI packages.
+
+Current policy for web-ui:
+
+- Keep Vite-based browser bundling workflow.
+- Keep Node runtime requirement explicit in package metadata.
+- Revisit Bun bundling migration only if a concrete compatibility or maintenance need arises.
+
 ## Node to Bun API Mapping
 
 | Node / Legacy Pattern | Bun Pattern | Usage Rule |

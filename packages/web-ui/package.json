@@ -47,5 +47,8 @@
 		"mini-lit"
 	],
 	"author": "Mario Zechner",
-	"license": "MIT"
+	"license": "MIT",
+	"engines": {
+		"node": ">=20.19.0"
+	}
 }
