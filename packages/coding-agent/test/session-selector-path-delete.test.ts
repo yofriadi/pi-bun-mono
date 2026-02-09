@@ -1,9 +1,9 @@
 import { DEFAULT_EDITOR_KEYBINDINGS, EditorKeybindingsManager, setEditorKeybindings } from "@mariozechner/pi-tui";
 import { beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { KeybindingsManager } from "../src/core/keybindings.js";
-import type { SessionInfo } from "../src/core/session-manager.js";
-import { SessionSelectorComponent } from "../src/modes/interactive/components/session-selector.js";
-import { initTheme } from "../src/modes/interactive/theme/theme.js";
+import { KeybindingsManager } from "../src/core/keybindings";
+import type { SessionInfo } from "../src/core/session-manager";
+import { SessionSelectorComponent } from "../src/modes/interactive/components/session-selector";
+import { initTheme } from "../src/modes/interactive/theme/theme";
 
 type Deferred<T> = {
 	promise: Promise<T>;

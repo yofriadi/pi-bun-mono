@@ -10,8 +10,8 @@ import {
 	Spacer,
 	Text,
 } from "@mariozechner/pi-tui";
-import { theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
+import { theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
 
 // EnabledIds: null = all enabled (no filter), string[] = explicit ordered list
 type EnabledIds = string[] | null;

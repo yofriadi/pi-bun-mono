@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseGitUrl } from "../src/utils/git.js";
+import { parseGitUrl } from "../src/utils/git";
 
 describe("SSH Git URL Parsing", () => {
 	describe("ssh:// protocol", () => {

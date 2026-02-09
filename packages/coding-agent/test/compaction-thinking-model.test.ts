@@ -14,18 +14,18 @@ import { join } from "node:path";
 import { Agent, type ThinkingLevel } from "@mariozechner/pi-agent-core";
 import { getModel, type Model } from "@mariozechner/pi-ai";
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from "vitest";
-import { AgentSession } from "../src/core/agent-session.js";
-import { ModelRegistry } from "../src/core/model-registry.js";
-import { SessionManager } from "../src/core/session-manager.js";
-import { SettingsManager } from "../src/core/settings-manager.js";
-import { codingTools } from "../src/core/tools/index.js";
+import { AgentSession } from "../src/core/agent-session";
+import { ModelRegistry } from "../src/core/model-registry";
+import { SessionManager } from "../src/core/session-manager";
+import { SettingsManager } from "../src/core/settings-manager";
+import { codingTools } from "../src/core/tools/index";
 import {
 	API_KEY,
 	createTestResourceLoader,
 	getRealAuthStorage,
 	hasAuthForProvider,
 	resolveApiKey,
-} from "./utilities.js";
+} from "./utilities";
 
 // Check for auth
 const HAS_ANTIGRAVITY_AUTH = hasAuthForProvider("google-antigravity");

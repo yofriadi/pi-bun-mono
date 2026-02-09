@@ -1,19 +1,19 @@
 import { join } from "node:path";
 import { Agent, type AgentMessage, type ThinkingLevel } from "@mariozechner/pi-agent-core";
 import type { Message, Model } from "@mariozechner/pi-ai";
-import { getAgentDir, getDocsPath } from "../config.js";
-import { AgentSession } from "./agent-session.js";
-import { AuthStorage } from "./auth-storage.js";
-import { DEFAULT_THINKING_LEVEL } from "./defaults.js";
-import type { ExtensionRunner, LoadExtensionsResult, ToolDefinition } from "./extensions/index.js";
-import { convertToLlm } from "./messages.js";
-import { ModelRegistry } from "./model-registry.js";
-import { findInitialModel } from "./model-resolver.js";
-import type { ResourceLoader } from "./resource-loader.js";
-import { DefaultResourceLoader } from "./resource-loader.js";
-import { SessionManager } from "./session-manager.js";
-import { SettingsManager } from "./settings-manager.js";
-import { time } from "./timings.js";
+import { getAgentDir, getDocsPath } from "../config";
+import { AgentSession } from "./agent-session";
+import { AuthStorage } from "./auth-storage";
+import { DEFAULT_THINKING_LEVEL } from "./defaults";
+import type { ExtensionRunner, LoadExtensionsResult, ToolDefinition } from "./extensions/index";
+import { convertToLlm } from "./messages";
+import { ModelRegistry } from "./model-registry";
+import { findInitialModel } from "./model-resolver";
+import type { ResourceLoader } from "./resource-loader";
+import { DefaultResourceLoader } from "./resource-loader";
+import { SessionManager } from "./session-manager";
+import { SettingsManager } from "./settings-manager";
+import { time } from "./timings";
 import {
 	allTools,
 	bashTool,
@@ -36,7 +36,7 @@ import {
 	type Tool,
 	type ToolName,
 	writeTool,
-} from "./tools/index.js";
+} from "./tools/index";
 
 export interface CreateAgentSessionOptions {
 	/** Working directory for project-local discovery. Default: process.cwd() */
@@ -92,10 +92,10 @@ export type {
 	SlashCommandLocation,
 	SlashCommandSource,
 	ToolDefinition,
-} from "./extensions/index.js";
-export type { PromptTemplate } from "./prompt-templates.js";
-export type { Skill } from "./skills.js";
-export type { Tool } from "./tools/index.js";
+} from "./extensions/index";
+export type { PromptTemplate } from "./prompt-templates";
+export type { Skill } from "./skills";
+export type { Tool } from "./tools/index";
 
 export {
 	// Pre-built tools (use process.cwd())

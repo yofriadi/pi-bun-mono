@@ -4,9 +4,9 @@ import { spawnSync } from "child_process";
 import { existsSync } from "fs";
 import { globSync } from "glob";
 import path from "path";
-import { ensureTool } from "../../utils/tools-manager.js";
-import { resolveToCwd } from "./path-utils.js";
-import { DEFAULT_MAX_BYTES, formatSize, type TruncationResult, truncateHead } from "./truncate.js";
+import { ensureTool } from "../../utils/tools-manager";
+import { resolveToCwd } from "./path-utils";
+import { DEFAULT_MAX_BYTES, formatSize, type TruncationResult, truncateHead } from "./truncate";
 
 const findSchema = Type.Object({
 	pattern: Type.String({

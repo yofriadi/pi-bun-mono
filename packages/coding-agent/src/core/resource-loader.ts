@@ -2,21 +2,21 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve, sep } from "node:path";
 import chalk from "chalk";
-import { CONFIG_DIR_NAME, getAgentDir } from "../config.js";
-import { loadThemeFromPath, type Theme } from "../modes/interactive/theme/theme.js";
-import type { ResourceDiagnostic } from "./diagnostics.js";
+import { CONFIG_DIR_NAME, getAgentDir } from "../config";
+import { loadThemeFromPath, type Theme } from "../modes/interactive/theme/theme";
+import type { ResourceDiagnostic } from "./diagnostics";
 
-export type { ResourceCollision, ResourceDiagnostic } from "./diagnostics.js";
+export type { ResourceCollision, ResourceDiagnostic } from "./diagnostics";
 
-import { createEventBus, type EventBus } from "./event-bus.js";
-import { createExtensionRuntime, loadExtensionFromFactory, loadExtensions } from "./extensions/loader.js";
-import type { Extension, ExtensionFactory, ExtensionRuntime, LoadExtensionsResult } from "./extensions/types.js";
-import { DefaultPackageManager, type PathMetadata } from "./package-manager.js";
-import type { PromptTemplate } from "./prompt-templates.js";
-import { loadPromptTemplates } from "./prompt-templates.js";
-import { SettingsManager } from "./settings-manager.js";
-import type { Skill } from "./skills.js";
-import { loadSkills } from "./skills.js";
+import { createEventBus, type EventBus } from "./event-bus";
+import { createExtensionRuntime, loadExtensionFromFactory, loadExtensions } from "./extensions/loader";
+import type { Extension, ExtensionFactory, ExtensionRuntime, LoadExtensionsResult } from "./extensions/types";
+import { DefaultPackageManager, type PathMetadata } from "./package-manager";
+import type { PromptTemplate } from "./prompt-templates";
+import { loadPromptTemplates } from "./prompt-templates";
+import { SettingsManager } from "./settings-manager";
+import type { Skill } from "./skills";
+import { loadSkills } from "./skills";
 
 export interface ResourceExtensionPaths {
 	skillPaths?: Array<{ path: string; metadata: PathMetadata }>;

@@ -2,9 +2,9 @@ import { existsSync, readdirSync, readFileSync, realpathSync, statSync } from "f
 import ignore from "ignore";
 import { homedir } from "os";
 import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "path";
-import { CONFIG_DIR_NAME, getAgentDir } from "../config.js";
-import { parseFrontmatter } from "../utils/frontmatter.js";
-import type { ResourceDiagnostic } from "./diagnostics.js";
+import { CONFIG_DIR_NAME, getAgentDir } from "../config";
+import { parseFrontmatter } from "../utils/frontmatter";
+import type { ResourceDiagnostic } from "./diagnostics";
 
 /** Max name length per spec */
 const MAX_NAME_LENGTH = 64;

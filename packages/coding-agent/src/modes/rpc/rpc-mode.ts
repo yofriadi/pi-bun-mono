@@ -13,13 +13,13 @@
 
 import * as crypto from "node:crypto";
 import * as readline from "readline";
-import type { AgentSession } from "../../core/agent-session.js";
+import type { AgentSession } from "../../core/agent-session";
 import type {
 	ExtensionUIContext,
 	ExtensionUIDialogOptions,
 	ExtensionWidgetOptions,
-} from "../../core/extensions/index.js";
-import { type Theme, theme } from "../interactive/theme/theme.js";
+} from "../../core/extensions/index";
+import { type Theme, theme } from "../interactive/theme/theme";
 import type {
 	RpcCommand,
 	RpcExtensionUIRequest,
@@ -27,7 +27,7 @@ import type {
 	RpcResponse,
 	RpcSessionState,
 	RpcSlashCommand,
-} from "./rpc-types.js";
+} from "./rpc-types";
 
 // Re-export types for consumers
 export type {
@@ -36,7 +36,7 @@ export type {
 	RpcExtensionUIResponse,
 	RpcResponse,
 	RpcSessionState,
-} from "./rpc-types.js";
+} from "./rpc-types";
 
 /**
  * Run in RPC mode.

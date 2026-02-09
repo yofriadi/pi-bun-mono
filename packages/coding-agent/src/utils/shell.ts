@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import { delimiter } from "node:path";
 import { spawn, spawnSync } from "child_process";
-import { getBinDir, getSettingsPath } from "../config.js";
-import { SettingsManager } from "../core/settings-manager.js";
+import { getBinDir, getSettingsPath } from "../config";
+import { SettingsManager } from "../core/settings-manager";
 
 let cachedShellConfig: { shell: string; args: string[] } | null = null;
 

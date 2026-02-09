@@ -1,7 +1,7 @@
 import { Box, Markdown, type MarkdownTheme, Spacer, Text } from "@mariozechner/pi-tui";
-import type { CompactionSummaryMessage } from "../../../core/messages.js";
-import { getMarkdownTheme, theme } from "../theme/theme.js";
-import { editorKey } from "./keybinding-hints.js";
+import type { CompactionSummaryMessage } from "../../../core/messages";
+import { getMarkdownTheme, theme } from "../theme/theme";
+import { editorKey } from "./keybinding-hints";
 
 /**
  * Component that renders a compaction message with collapsed/expanded state.

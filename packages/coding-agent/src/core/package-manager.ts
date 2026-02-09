@@ -5,9 +5,9 @@ import { homedir, tmpdir } from "node:os";
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
 import ignore from "ignore";
 import { minimatch } from "minimatch";
-import { CONFIG_DIR_NAME } from "../config.js";
-import { type GitSource, parseGitUrl } from "../utils/git.js";
-import type { PackageSource, SettingsManager } from "./settings-manager.js";
+import { CONFIG_DIR_NAME } from "../config";
+import { type GitSource, parseGitUrl } from "../utils/git";
+import type { PackageSource, SettingsManager } from "./settings-manager";
 
 export interface PathMetadata {
 	source: string;

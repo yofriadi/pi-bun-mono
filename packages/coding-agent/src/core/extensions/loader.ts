@@ -18,13 +18,13 @@ import * as _bundledPiTui from "@mariozechner/pi-tui";
 // These MUST be static so Bun bundles them into the compiled binary.
 // The virtualModules option then makes them available to extensions.
 import * as _bundledTypebox from "@sinclair/typebox";
-import { getAgentDir, isBunBinary } from "../../config.js";
+import { getAgentDir, isBunBinary } from "../../config";
 // NOTE: This import works because loader.ts exports are NOT re-exported from index.ts,
 // avoiding a circular dependency. Extensions can import from @mariozechner/pi-coding-agent.
-import * as _bundledPiCodingAgent from "../../index.js";
-import { createEventBus, type EventBus } from "../event-bus.js";
-import type { ExecOptions } from "../exec.js";
-import { execCommand } from "../exec.js";
+import * as _bundledPiCodingAgent from "../../index";
+import { createEventBus, type EventBus } from "../event-bus";
+import type { ExecOptions } from "../exec";
+import { execCommand } from "../exec";
 import type {
 	Extension,
 	ExtensionAPI,
@@ -35,7 +35,7 @@ import type {
 	ProviderConfig,
 	RegisteredCommand,
 	ToolDefinition,
-} from "./types.js";
+} from "./types";
 
 /** Modules available to extensions via virtualModules (for compiled Bun binary) */
 const VIRTUAL_MODULES: Record<string, unknown> = {
@@ -162,7 +162,7 @@ function createExtensionAPI(
 			shortcut: KeyId,
 			options: {
 				description?: string;
-				handler: (ctx: import("./types.js").ExtensionContext) => Promise<void> | void;
+				handler: (ctx: import("./types").ExtensionContext) => Promise<void> | void;
 			},
 		): void {
 			extension.shortcuts.set(shortcut, { shortcut, extensionPath: extension.path, ...options });

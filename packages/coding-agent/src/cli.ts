@@ -7,6 +7,6 @@
  */
 process.title = "pi";
 
-import { main } from "./main.js";
+import { main } from "./main";
 
 main(process.argv.slice(2));

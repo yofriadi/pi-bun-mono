@@ -5,7 +5,7 @@
 import chalk from "chalk";
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
-import { CONFIG_DIR_NAME, getAgentDir, getBinDir } from "./config.js";
+import { CONFIG_DIR_NAME, getAgentDir, getBinDir } from "./config";
 
 const MIGRATION_GUIDE_URL =
 	"https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/CHANGELOG.md#extensions-migration";

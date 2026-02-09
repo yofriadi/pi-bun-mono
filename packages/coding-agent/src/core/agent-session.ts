@@ -25,11 +25,11 @@ import type {
 } from "@mariozechner/pi-agent-core";
 import type { AssistantMessage, ImageContent, Message, Model, TextContent } from "@mariozechner/pi-ai";
 import { isContextOverflow, modelsAreEqual, resetApiProviders, supportsXhigh } from "@mariozechner/pi-ai";
-import { getDocsPath } from "../config.js";
-import { theme } from "../modes/interactive/theme/theme.js";
-import { stripFrontmatter } from "../utils/frontmatter.js";
-import { sleep } from "../utils/sleep.js";
-import { type BashResult, executeBash as executeBashCommand, executeBashWithOperations } from "./bash-executor.js";
+import { getDocsPath } from "../config";
+import { theme } from "../modes/interactive/theme/theme";
+import { stripFrontmatter } from "../utils/frontmatter";
+import { sleep } from "../utils/sleep";
+import { type BashResult, executeBash as executeBashCommand, executeBashWithOperations } from "./bash-executor";
 import {
 	type CompactionResult,
 	calculateContextTokens,
@@ -39,10 +39,10 @@ import {
 	generateBranchSummary,
 	prepareCompaction,
 	shouldCompact,
-} from "./compaction/index.js";
-import { DEFAULT_THINKING_LEVEL } from "./defaults.js";
-import { exportSessionToHtml, type ToolHtmlRenderer } from "./export-html/index.js";
-import { createToolHtmlRenderer } from "./export-html/tool-renderer.js";
+} from "./compaction/index";
+import { DEFAULT_THINKING_LEVEL } from "./defaults";
+import { exportSessionToHtml, type ToolHtmlRenderer } from "./export-html/index";
+import { createToolHtmlRenderer } from "./export-html/tool-renderer";
 import {
 	type ContextUsage,
 	type ExtensionCommandContextActions,
@@ -62,17 +62,17 @@ import {
 	type TurnStartEvent,
 	wrapRegisteredTools,
 	wrapToolsWithExtensions,
-} from "./extensions/index.js";
-import type { BashExecutionMessage, CustomMessage } from "./messages.js";
-import type { ModelRegistry } from "./model-registry.js";
-import { expandPromptTemplate, type PromptTemplate } from "./prompt-templates.js";
-import type { ResourceExtensionPaths, ResourceLoader } from "./resource-loader.js";
-import type { BranchSummaryEntry, CompactionEntry, SessionManager } from "./session-manager.js";
-import type { SettingsManager } from "./settings-manager.js";
-import { BUILTIN_SLASH_COMMANDS, type SlashCommandInfo, type SlashCommandLocation } from "./slash-commands.js";
-import { buildSystemPrompt } from "./system-prompt.js";
-import type { BashOperations } from "./tools/bash.js";
-import { createAllTools } from "./tools/index.js";
+} from "./extensions/index";
+import type { BashExecutionMessage, CustomMessage } from "./messages";
+import type { ModelRegistry } from "./model-registry";
+import { expandPromptTemplate, type PromptTemplate } from "./prompt-templates";
+import type { ResourceExtensionPaths, ResourceLoader } from "./resource-loader";
+import type { BranchSummaryEntry, CompactionEntry, SessionManager } from "./session-manager";
+import type { SettingsManager } from "./settings-manager";
+import { BUILTIN_SLASH_COMMANDS, type SlashCommandInfo, type SlashCommandLocation } from "./slash-commands";
+import { buildSystemPrompt } from "./system-prompt";
+import type { BashOperations } from "./tools/bash";
+import { createAllTools } from "./tools/index";
 
 // ============================================================================
 // Skill Block Parsing

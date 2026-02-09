@@ -1,8 +1,8 @@
 import { homedir } from "os";
 import { join, resolve } from "path";
 import { describe, expect, it } from "vitest";
-import type { ResourceDiagnostic } from "../src/core/diagnostics.js";
-import { formatSkillsForPrompt, loadSkills, loadSkillsFromDir, type Skill } from "../src/core/skills.js";
+import type { ResourceDiagnostic } from "../src/core/diagnostics";
+import { formatSkillsForPrompt, loadSkills, loadSkillsFromDir, type Skill } from "../src/core/skills";
 
 const fixturesDir = resolve(__dirname, "fixtures/skills");
 const collisionFixturesDir = resolve(__dirname, "fixtures/skills-collision");
