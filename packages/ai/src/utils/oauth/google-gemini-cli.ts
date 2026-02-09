@@ -7,8 +7,8 @@
  */
 
 import type { Server } from "node:http";
-import { generatePKCE } from "./pkce.js";
-import type { OAuthCredentials, OAuthLoginCallbacks, OAuthProviderInterface } from "./types.js";
+import { generatePKCE } from "./pkce";
+import type { OAuthCredentials, OAuthLoginCallbacks, OAuthProviderInterface } from "./types";
 
 type GeminiCredentials = OAuthCredentials & {
 	projectId: string;
