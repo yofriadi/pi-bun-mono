@@ -1,8 +1,8 @@
-import { fuzzyFilter } from "../fuzzy.js";
-import { getEditorKeybindings } from "../keybindings.js";
-import type { Component } from "../tui.js";
-import { truncateToWidth, visibleWidth, wrapTextWithAnsi } from "../utils.js";
-import { Input } from "./input.js";
+import { fuzzyFilter } from "../fuzzy";
+import { getEditorKeybindings } from "../keybindings";
+import type { Component } from "../tui";
+import { truncateToWidth, visibleWidth, wrapTextWithAnsi } from "../utils";
+import { Input } from "./input";
 
 export interface SettingItem {
 	/** Unique identifier for this setting */

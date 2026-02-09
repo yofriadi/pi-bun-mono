@@ -1,6 +1,6 @@
-import { getEditorKeybindings } from "../keybindings.js";
-import type { Component } from "../tui.js";
-import { truncateToWidth } from "../utils.js";
+import { getEditorKeybindings } from "../keybindings";
+import type { Component } from "../tui";
+import { truncateToWidth } from "../utils";
 
 const normalizeToSingleLine = (text: string): string => text.replace(/[\r\n]+/g, " ").trim();
 

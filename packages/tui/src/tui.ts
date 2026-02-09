@@ -5,10 +5,10 @@
 import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
-import { isKeyRelease, matchesKey } from "./keys.js";
-import type { Terminal } from "./terminal.js";
-import { getCapabilities, isImageLine, setCellDimensions } from "./terminal-image.js";
-import { extractSegments, sliceByColumn, sliceWithWidth, visibleWidth } from "./utils.js";
+import { isKeyRelease, matchesKey } from "./keys";
+import type { Terminal } from "./terminal";
+import { getCapabilities, isImageLine, setCellDimensions } from "./terminal-image";
+import { extractSegments, sliceByColumn, sliceWithWidth, visibleWidth } from "./utils";
 
 /**
  * Component interface - all components must implement this

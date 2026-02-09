@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
-import { setKittyProtocolActive } from "./keys.js";
-import { StdinBuffer } from "./stdin-buffer.js";
+import { setKittyProtocolActive } from "./keys";
+import { StdinBuffer } from "./stdin-buffer";
 
 /**
  * Minimal terminal interface for TUI
