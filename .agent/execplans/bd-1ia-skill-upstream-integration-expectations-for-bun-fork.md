@@ -17,7 +17,8 @@ This task adds a reusable skill so future agents can safely integrate upstream `
 - [x] (2026-02-09 22:31Z) Added executable script `scripts/validate-integration.sh` for deterministic post-upstream checks.
 - [x] (2026-02-09 22:31Z) Removed scaffold placeholder files/directories not needed by the skill.
 - [x] (2026-02-09 22:32Z) Executed `scripts/validate-integration.sh` and `scripts/validate-integration.sh --with-pack`; both passed.
-- [ ] Commit issue-scoped files, comment with commit hash, close issue, and sync state.
+- [x] (2026-02-09 22:33Z) Committed issue-scoped files as `199fc86b`.
+- [ ] Comment with commit hash, close issue, and sync state.
 
 ## Surprises & Discoveries
 
@@ -36,11 +37,11 @@ This task adds a reusable skill so future agents can safely integrate upstream `
 
 ## Outcomes & Retrospective
 
-In-progress outcome:
+Completed outcome so far:
 
 1. New skill created at `.agents/skills/pi-bun-upstream-integration` with Bun-fork integration guidance.
 2. Scripted validation confirms current workspace passes the skill's integration matrix, including packed install path.
-3. Remaining work is issue commit/close workflow.
+3. Issue-scoped commit completed; remaining work is tracker close/sync.
 
 ## Context and Orientation
 
@@ -98,3 +99,4 @@ Artifacts:
 No product runtime interfaces are changed by this issue. The skill script depends on local `bun`, `npm`, and optionally global `pi` for parity comparison.
 
 Revision Note (2026-02-09 22:31Z, Codex): Initial ExecPlan created for issue `bd-1ia`.
+Revision Note (2026-02-09 22:33Z, Codex): Updated progress and outcomes after commit `199fc86b`.
