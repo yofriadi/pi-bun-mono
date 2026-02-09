@@ -12,7 +12,7 @@ import {
 	type TextContent,
 	type ThinkingBudgets,
 } from "@mariozechner/pi-ai";
-import { agentLoop, agentLoopContinue } from "./agent-loop.js";
+import { agentLoop, agentLoopContinue } from "./agent-loop";
 import type {
 	AgentContext,
 	AgentEvent,
@@ -22,7 +22,7 @@ import type {
 	AgentTool,
 	StreamFn,
 	ThinkingLevel,
-} from "./types.js";
+} from "./types";
 
 /**
  * Default convertToLlm: Keep only LLM-compatible messages, convert attachments.
