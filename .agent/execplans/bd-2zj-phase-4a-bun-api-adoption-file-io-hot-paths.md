@@ -14,8 +14,8 @@ After this change, hot-path file reads and writes in selected coding-agent tools
 - [x] (2026-02-09 13:04Z) Created this ExecPlan at `.agent/execplans/bd-2zj-phase-4a-bun-api-adoption-file-io-hot-paths.md`.
 - [x] (2026-02-09 13:06Z) Replaced file-content read/write operations with Bun APIs in `core/tools/read.ts` and `core/tools/write.ts`.
 - [x] (2026-02-09 13:06Z) Validated directory/access operations remain on Node FS (`fsAccess`, `fsMkdir`) and only read/write adapters changed.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-2zj`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-2zj`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -115,3 +115,4 @@ No public interfaces change; only internal default file operation adapters in to
 
 Revision Note (2026-02-09 13:04Z, Codex): Initial ExecPlan created because issue `bd-2zj` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 13:06Z, Codex): Updated progress and outcomes after Bun API adapter migration and focused validation.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 992522a1.

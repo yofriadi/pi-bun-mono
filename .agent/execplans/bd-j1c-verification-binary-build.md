@@ -20,7 +20,7 @@ This task verifies that the coding-agent still works when compiled as a standalo
 - [x] (2026-02-09 13:59Z) Captured binary size and assessed reasonableness (`68M`, reasonable for Bun-compiled CLI with bundled runtime).
 - [x] (2026-02-09 14:00Z) Verified package `build:binary` script status for issue note: FAIL (pre-compile TypeScript/tsgo errors).
 - [x] (2026-02-09 14:00Z) Summarized verification outcomes and parity impact in this plan.
-- [ ] Commit issue-scoped notes and close `bd-j1c` in Beads.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped notes and close `bd-j1c` in Beads.
 
 ## Surprises & Discoveries
 
@@ -151,7 +151,7 @@ Artifacts captured:
 5. `/tmp/bd-j1c-prompt1.log`
 6. `/tmp/bd-j1c-prompt2.log`
 7. `/tmp/bd-j1c-build-binary-script.log`
-8. Final commit hash and Beads close/sync confirmation (pending).
+8. Final commit hash and Beads close/sync confirmation (resolved via commit af6a03e1).
 
 ## Interfaces and Dependencies
 
@@ -159,3 +159,4 @@ No code changes are required unless a minimal fix is needed to make compiled bin
 
 Revision Note (2026-02-09 13:59Z, Codex): Initial ExecPlan created because issue `bd-j1c` had no existing ExecPlan path.
 Revision Note (2026-02-09 14:00Z, Codex): Updated with build results, runtime failure evidence (`dist/package.json` missing), `build:binary` script failure evidence, and full verification matrix outcomes.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: af6a03e1.

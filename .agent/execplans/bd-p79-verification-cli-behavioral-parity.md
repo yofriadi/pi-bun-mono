@@ -15,7 +15,7 @@ This task verifies whether migrated source-entry CLI behavior remains aligned wi
 - [x] (2026-02-09 13:15Z) Ran requested verification commands and recorded outcomes for help, tools, interactive startup, non-interactive prompt mode, and session resume behavior.
 - [x] (2026-02-09 13:15Z) Documented blockers/differences with concrete command evidence (missing dist comparator; `tools` argument behavior).
 - [x] (2026-02-09 13:16Z) Confirmed with user to keep verification-side filesystem side effects (`bun.lock` and executable-bit updates) and prepared issue closure commit.
-- [ ] Commit issue-scoped verification notes and close the issue in Beads.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped verification notes and close the issue in Beads.
 
 ## Surprises & Discoveries
 
@@ -127,3 +127,4 @@ No code interface change is required for this issue unless a critical verificati
 
 Revision Note (2026-02-09 13:10Z, Codex): Initial ExecPlan created because issue `bd-p79` had no ExecPlan path and required a self-contained verification guide.
 Revision Note (2026-02-09 13:15Z, Codex): Updated verification results, blockers, and decisions after executing all requested parity checks.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: baef4206.

@@ -14,8 +14,8 @@ After this change, TypeScript files in `packages/tui` will use extensionless int
 - [x] (2026-02-09 13:01Z) Created this ExecPlan at `.agent/execplans/bd-2u8-phase-2-import-extension-cleanup-packages-tui.md`.
 - [x] (2026-02-09 13:02Z) Removed `.js` suffixes from internal relative imports in `packages/tui/**/*.ts`.
 - [x] (2026-02-09 13:02Z) Validated no relative `.js` imports remain in `packages/tui` TypeScript files.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-2u8`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-2u8`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -100,3 +100,4 @@ No dependency or runtime behavior changes are intended; only relative import str
 
 Revision Note (2026-02-09 13:01Z, Codex): Initial ExecPlan created because issue `bd-2u8` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 13:02Z, Codex): Updated progress and outcomes after codemod and validation completion.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: a9a37209.

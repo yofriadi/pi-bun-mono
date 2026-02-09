@@ -17,7 +17,7 @@ This task resolves runtime ambiguity for `packages/web-ui` in a Bun-focused mono
 - [x] (2026-02-09 14:09Z) Applied runtime-boundary decision in package metadata by adding `engines.node >=20.19.0` to web-ui manifests.
 - [x] (2026-02-09 14:09Z) Updated `PORTING_NOTES.md` with explicit web-ui Node/Vite boundary policy.
 - [x] (2026-02-09 14:09Z) Validated touched files: JSON manifests parse and `PORTING_NOTES.md` contains web-ui boundary note.
-- [ ] Commit, comment on Beads issue, close issue, and flush Beads sync state.
+- [x] (2026-02-09 19:04Z) Commit, comment on Beads issue, close issue, and flush Beads sync state.
 
 ## Surprises & Discoveries
 
@@ -40,10 +40,10 @@ This task resolves runtime ambiguity for `packages/web-ui` in a Bun-focused mono
 
 ## Outcomes & Retrospective
 
-In-progress outcome:
+Completed outcome:
 
 1. Runtime boundary decision has been codified in metadata and docs.
-2. Remaining work is issue closure workflow (validation, commit, Beads comment/close/sync).
+2. Issue closure workflow (validation, commit, Beads comment/close/sync) was completed.
 
 ## Context and Orientation
 
@@ -102,3 +102,4 @@ No code interfaces are changed. Affected surfaces are package metadata and repos
 Revision Note (2026-02-09 14:10Z, Codex): Initial ExecPlan created because issue `bd-37y` had no existing ExecPlan path.
 Revision Note (2026-02-09 14:09Z, Codex): Updated progress and decisions after applying web-ui Node/Vite boundary edits.
 Revision Note (2026-02-09 14:09Z, Codex): Marked validation complete after manifest parse checks and documentation grep confirmation.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: e33dc87c.

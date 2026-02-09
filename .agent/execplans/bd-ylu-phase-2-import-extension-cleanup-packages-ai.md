@@ -14,8 +14,8 @@ After this change, TypeScript files under `packages/ai` will use extensionless r
 - [x] (2026-02-09 12:53Z) Created this ExecPlan at `.agent/execplans/bd-ylu-phase-2-import-extension-cleanup-packages-ai.md`.
 - [x] (2026-02-09 12:55Z) Removed `.js` suffixes from relative internal imports in `packages/ai` TypeScript files via codemod.
 - [x] (2026-02-09 12:55Z) Verified no relative `.js` imports remain anywhere in `packages/ai`.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-ylu`, flush Beads sync, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-ylu`, flush Beads sync, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -40,7 +40,7 @@ After this change, TypeScript files under `packages/ai` will use extensionless r
 
 ## Outcomes & Retrospective
 
-Milestones 1 and 2 are complete. Relative `.js` import suffixes were removed across `packages/ai` TypeScript files and validated with zero remaining matches. Remaining work is commit and issue closure.
+Milestones 1 through 3 are complete. Relative `.js` import suffixes were removed across `packages/ai` TypeScript files and validated with zero remaining matches, then committed with issue closure.
 
 ## Context and Orientation
 
@@ -118,3 +118,4 @@ No package dependencies or runtime logic are changed. This issue only updates mo
 
 Revision Note (2026-02-09 12:53Z, Codex): Initial ExecPlan created because issue `bd-ylu` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 12:55Z, Codex): Updated progress/outcomes after codemod execution and validation.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: b8f16434.

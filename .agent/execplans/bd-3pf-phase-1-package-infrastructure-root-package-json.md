@@ -15,8 +15,8 @@ After this change, the monorepo root package metadata and key developer scripts 
 - [x] (2026-02-09 12:42Z) Created this self-contained ExecPlan at `.agent/execplans/bd-3pf-phase-1-package-infrastructure-root-package-json.md`.
 - [x] (2026-02-09 12:44Z) Edited root `package.json` for Bun engines, Bun-first `dev`/`check`/`test` scripts, removed `husky`/`tsx`, added `@types/bun`, and removed `prepare` hook tied to Husky.
 - [x] (2026-02-09 12:44Z) Ran validation command `bun run check` and captured failing output for repo-wide pre-existing type/config problems.
-- [ ] Commit issue-scoped changes and add issue progress notes with commit links.
-- [ ] Close `bd-3pf`, sync Beads state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped changes and add issue progress notes with commit links.
+- [x] (2026-02-09 19:04Z) Close `bd-3pf`, sync Beads state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -133,3 +133,4 @@ No runtime module API signatures or TypeScript source interfaces are changed in 
 
 Revision Note (2026-02-09 12:42Z, Codex): Initial ExecPlan created because issue `bd-3pf` had no existing ExecPlan path and required self-contained execution guidance.
 Revision Note (2026-02-09 12:44Z, Codex): Updated progress, decisions, and acceptance details after implementing package edits and recording `bun run check` failure evidence.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 5576d463.

@@ -14,8 +14,8 @@ After this change, the repository has an explicit Bun configuration file at the 
 - [x] (2026-02-09 12:52Z) Created this ExecPlan at `.agent/execplans/bd-3e3-phase-1-package-infrastructure-bunfig-toml.md`.
 - [x] (2026-02-09 12:53Z) Created root `bunfig.toml` with requested `install` and `loader` sections.
 - [x] (2026-02-09 12:53Z) Validated file content via `cat bunfig.toml`.
-- [ ] Commit issue-scoped files and add Beads progress note with commit hash.
-- [ ] Close `bd-3e3`, flush Beads sync, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads progress note with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-3e3`, flush Beads sync, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -30,7 +30,7 @@ After this change, the repository has an explicit Bun configuration file at the 
 
 ## Outcomes & Retrospective
 
-Milestones 1 and 2 are complete. Root Bun configuration now exists with deterministic install and markdown text-loader settings. Remaining work is commit and Beads closure.
+Milestones 1 through 3 are complete. Root Bun configuration exists with deterministic install and markdown text-loader settings, and the issue commit/Beads closure workflow was completed.
 
 ## Context and Orientation
 
@@ -96,3 +96,4 @@ Only one new file interface is introduced: root `bunfig.toml`. No code module or
 
 Revision Note (2026-02-09 12:52Z, Codex): Initial ExecPlan created because issue `bd-3e3` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 12:53Z, Codex): Updated progress and outcomes after creating and validating `bunfig.toml`.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: db8a435c.

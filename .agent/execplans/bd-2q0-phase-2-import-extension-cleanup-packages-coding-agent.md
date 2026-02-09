@@ -14,8 +14,8 @@ After this change, TypeScript files in `packages/coding-agent` will use extensio
 - [x] (2026-02-09 12:57Z) Created this ExecPlan at `.agent/execplans/bd-2q0-phase-2-import-extension-cleanup-packages-coding-agent.md`.
 - [x] (2026-02-09 12:58Z) Removed `.js` suffixes from internal relative imports in `packages/coding-agent` TypeScript files.
 - [x] (2026-02-09 12:58Z) Validated no relative `.js` imports remain in `packages/coding-agent` TypeScript files and reconfirmed no real `.js`-file import exceptions.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-2q0`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-2q0`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -108,3 +108,4 @@ No dependency or runtime logic changes are intended. This issue only rewrites in
 
 Revision Note (2026-02-09 12:57Z, Codex): Initial ExecPlan created because issue `bd-2q0` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 12:58Z, Codex): Updated progress and outcomes after codemod execution and TypeScript-only validation.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 600ab31f.

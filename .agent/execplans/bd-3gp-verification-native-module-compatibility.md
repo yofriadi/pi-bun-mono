@@ -16,7 +16,7 @@ This verification checks whether native-module and WASM-sensitive runtime paths 
 - [x] (2026-02-09 13:55Z) Verified photon/WASM paths via focused tests (`clipboard-image`, BMP conversion, `image-processing`) with passing results.
 - [x] (2026-02-09 13:57Z) Verified OAuth-related behavior: direct `bun ... cli.ts login` enters interactive mode and treats `login` as user prompt; `/login` is available inside TTY, and auth storage/model registry tests pass.
 - [x] (2026-02-09 13:57Z) Summarized outcomes, blockers, and parity impact in this plan.
-- [ ] Commit issue-scoped notes and close `bd-3gp` in Beads.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped notes and close `bd-3gp` in Beads.
 
 ## Surprises & Discoveries
 
@@ -138,7 +138,7 @@ Artifacts captured:
 3. `/tmp/bd-3gp-native-tests.log`
 4. `/tmp/bd-3gp-auth-tests.log`
 5. `/tmp/bd-3gp-login.log`
-6. Final commit hash and Beads close/sync confirmation (pending).
+6. Final commit hash and Beads close/sync confirmation (resolved via commit 95d66e12).
 
 ## Interfaces and Dependencies
 
@@ -146,3 +146,4 @@ No code interface changes are required for this issue unless a minimal compatibi
 
 Revision Note (2026-02-09 13:52Z, Codex): Initial ExecPlan created because issue `bd-3gp` had no existing ExecPlan path.
 Revision Note (2026-02-09 13:57Z, Codex): Updated with clipboard/photon/auth verification outcomes, observed behavior differences, and concrete command artifacts.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 95d66e12.

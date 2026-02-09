@@ -15,7 +15,7 @@ This task creates a clear `PORTING_NOTES.md` for the Bun-runtime fork so contrib
 - [x] (2026-02-09 14:07Z) Collected fork policy from `AGENTS.md` and concrete verification outcomes from `bd-p79`, `bd-rbz`, `bd-3gp`, and `bd-j1c`.
 - [x] (2026-02-09 14:08Z) Authored `PORTING_NOTES.md` with required sections: scope, allowed/forbidden changes, API mapping table, testing instructions, known differences.
 - [x] (2026-02-09 14:08Z) Validated notes against current repository state and completed issue-scoped documentation update.
-- [ ] Commit and close issue.
+- [x] (2026-02-09 19:04Z) Commit and close issue.
 
 ## Surprises & Discoveries
 
@@ -99,7 +99,7 @@ Artifacts to capture:
 Captured artifacts so far:
 
 1. `PORTING_NOTES.md` authored.
-2. Commit hash and Beads close/sync confirmation (pending).
+2. Commit hash and Beads close/sync confirmation (resolved via commit 536aab2d).
 
 ## Interfaces and Dependencies
 
@@ -107,3 +107,4 @@ No code interfaces are changed by this issue; only documentation is updated.
 
 Revision Note (2026-02-09 14:05Z, Codex): Initial ExecPlan created because issue `bd-1fb` had no existing ExecPlan path.
 Revision Note (2026-02-09 14:08Z, Codex): Updated with completed documentation content and evidence-backed known differences.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 536aab2d.

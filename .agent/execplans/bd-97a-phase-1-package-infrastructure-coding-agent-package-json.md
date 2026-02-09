@@ -14,8 +14,8 @@ After this change, the `@mariozechner/pi-coding-agent` package metadata will poi
 - [x] (2026-02-09 12:47Z) Created this ExecPlan at `.agent/execplans/bd-97a-phase-1-package-infrastructure-coding-agent-package-json.md`.
 - [x] (2026-02-09 12:48Z) Edited `packages/coding-agent/package.json` for source-based entrypoints/exports, Bun engine declaration, and removal of `clean` and `dev` scripts.
 - [x] (2026-02-09 12:48Z) Validated JSON parsing and captured focused diff evidence for the package manifest edits.
-- [ ] Commit issue-scoped files and add Beads progress comment with commit hash.
-- [ ] Close `bd-97a`, flush Beads sync, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads progress comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-97a`, flush Beads sync, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -107,3 +107,4 @@ This issue only changes package manifest metadata interfaces in `packages/coding
 
 Revision Note (2026-02-09 12:47Z, Codex): Initial ExecPlan created because issue `bd-97a` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 12:48Z, Codex): Updated progress and decision records after implementing and validating package manifest changes.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 817d10bc.

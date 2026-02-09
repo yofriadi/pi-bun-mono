@@ -14,8 +14,8 @@ After this change, the remaining runtime packages (`ai`, `agent`, `tui`, `mom`, 
 - [x] (2026-02-09 12:49Z) Created this ExecPlan at `.agent/execplans/bd-jq1-phase-1-package-infrastructure-other-packages.md`.
 - [x] (2026-02-09 12:51Z) Edited all target package manifests for Bun engines, source entry surfaces, explicit `exports`, and build-script removal.
 - [x] (2026-02-09 12:51Z) Validated all edited manifests with JSON parse checks and captured focused diffs.
-- [ ] Commit issue-scoped files and add Beads progress note with commit hash.
-- [ ] Close `bd-jq1`, flush Beads sync, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads progress note with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-jq1`, flush Beads sync, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -41,7 +41,7 @@ After this change, the remaining runtime packages (`ai`, `agent`, `tui`, `mom`, 
 
 ## Outcomes & Retrospective
 
-Milestones 1 and 2 are complete. The five manifests now declare Bun engines and source entry surfaces, with build lifecycle scripts removed, while dependency blocks remain unchanged. Remaining work is commit/tracker closure.
+Milestones 1 through 3 are complete. The five manifests declare Bun engines and source entry surfaces, with build lifecycle scripts removed while dependency blocks remain unchanged, and tracker closure was completed.
 
 ## Context and Orientation
 
@@ -115,3 +115,4 @@ This issue changes package-manifest metadata interfaces only (`scripts`, `engine
 
 Revision Note (2026-02-09 12:49Z, Codex): Initial ExecPlan created because issue `bd-jq1` had no existing ExecPlan path and requires multi-package self-contained guidance.
 Revision Note (2026-02-09 12:51Z, Codex): Updated progress and decisions after completing multi-package manifest edits and validation.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: dc50f23b.

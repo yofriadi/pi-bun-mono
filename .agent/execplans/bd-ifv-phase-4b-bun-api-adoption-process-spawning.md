@@ -14,8 +14,8 @@ After this change, command execution hot paths in coding-agent will use Bun-nati
 - [x] (2026-02-09 13:06Z) Created this ExecPlan at `.agent/execplans/bd-ifv-phase-4b-bun-api-adoption-process-spawning.md`.
 - [x] (2026-02-09 13:09Z) Migrated `spawn` usage in `core/tools/bash.ts` and Windows `taskkill` spawn in `utils/shell.ts` to `Bun.spawn`.
 - [x] (2026-02-09 13:09Z) Performed focused source-level validation of spawn migration; targeted test invocation attempted but blocked by missing `vitest` binary in environment.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-ifv`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-ifv`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -115,3 +115,4 @@ Public tool interfaces remain unchanged (`BashOperations.exec` still resolves `{
 
 Revision Note (2026-02-09 13:06Z, Codex): Initial ExecPlan created because issue `bd-ifv` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 13:09Z, Codex): Updated progress and discoveries after Bun spawn migration and attempted focused test execution.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: e73e6cd5.

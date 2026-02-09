@@ -14,8 +14,8 @@ After this change, the coding-agent CLI script can be executed directly with Bun
 - [x] (2026-02-09 12:59Z) Created this ExecPlan at `.agent/execplans/bd-11n-phase-3-entry-point-migration-cli-shebang.md`.
 - [x] (2026-02-09 12:59Z) Changed shebang from `#!/usr/bin/env node` to `#!/usr/bin/env bun` in `packages/coding-agent/src/cli.ts`.
 - [x] (2026-02-09 12:59Z) Validated that `import { main } from "./main"` and `main(process.argv.slice(2));` remain unchanged.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-11n`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-11n`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -85,3 +85,4 @@ No runtime interfaces, dependencies, or CLI arguments change. This issue modifie
 
 Revision Note (2026-02-09 12:59Z, Codex): Initial ExecPlan created because issue `bd-11n` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 12:59Z, Codex): Updated progress and outcomes after shebang edit and validation.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: e2608a23.

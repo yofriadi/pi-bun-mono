@@ -15,7 +15,7 @@ This task replaces Promise-based `setTimeout` delay wrappers with `Bun.sleep` wh
 - [x] (2026-02-09 14:03Z) Enumerated Promise-wrapped `setTimeout` patterns across source files and filtered to pure delay wrappers (no signal/cancellation semantics).
 - [x] (2026-02-09 14:04Z) Replaced safe delay wrappers with `Bun.sleep` in seven source locations across `ai`, `mom`, `pods`, `tui`, and `coding-agent`.
 - [x] (2026-02-09 14:04Z) Ran `bun run check`; command fails in current workspace due many pre-existing `packages/tui/test` TypeScript issues unrelated to changed files.
-- [ ] Update plan outcomes and close issue with commit.
+- [x] (2026-02-09 19:04Z) Update plan outcomes and close issue with commit.
 
 ## Surprises & Discoveries
 
@@ -108,7 +108,7 @@ Captured artifacts:
 
 1. Diff covering seven source files listed in Outcomes.
 2. Validation log: `/tmp/bd-2j5-check.log` (`__EXIT:2`, unrelated pre-existing test TS errors).
-3. Commit hash and Beads close/sync confirmation (pending).
+3. Commit hash and Beads close/sync confirmation (resolved via commit aec7b4db).
 
 ## Interfaces and Dependencies
 
@@ -116,3 +116,4 @@ No public interface changes expected. Dependency is Bun runtime providing `Bun.s
 
 Revision Note (2026-02-09 14:01Z, Codex): Initial ExecPlan created because issue `bd-2j5` had no existing ExecPlan path.
 Revision Note (2026-02-09 14:04Z, Codex): Updated with completed Bun.sleep replacements, rationale for excluded timers, and validation outcome.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: aec7b4db.

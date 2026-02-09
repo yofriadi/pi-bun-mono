@@ -17,7 +17,7 @@ This task verifies whether this Bun-runtime fork can execute package test suites
 - [x] (2026-02-09 13:43Z) Ran `bun --cwd=packages/coding-agent run test` with `__EXIT:1` (7 files failed, 38 passed, 5 skipped; 71 failing tests, many `Bun is not defined`).
 - [x] (2026-02-09 13:44Z) Ran `bun --cwd=packages/tui run test` with `__EXIT:0` (400/400 passing).
 - [x] (2026-02-09 13:48Z) Summarized Bun-specific behavior differences (especially `Bun` global availability in test runtime and provider/env-dependent failures).
-- [ ] Commit issue-scoped changes and close `bd-rbz` in Beads.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped changes and close `bd-rbz` in Beads.
 
 ## Surprises & Discoveries
 
@@ -131,8 +131,8 @@ Artifacts captured during execution:
 3. `/tmp/bd-rbz-coding-agent-test.log`
 4. `/tmp/bd-rbz-tui-test.log`
 5. Command outcomes for each package test run are summarized in this document.
-6. Final commit hash for this issue (pending).
-7. Beads close/sync confirmation (pending).
+6. Final commit hash for this issue (resolved via commit b3976d87).
+7. Beads close/sync confirmation (resolved via commit b3976d87).
 
 Key evidence snippets:
 
@@ -147,3 +147,4 @@ No code interface changes are expected for this issue. Dependencies used are exi
 
 Revision Note (2026-02-09 13:32Z, Codex): Initial ExecPlan created because issue `bd-rbz` had no existing ExecPlan path.
 Revision Note (2026-02-09 13:48Z, Codex): Updated with executed test outcomes, discovered failures, and Bun-specific verification findings for all required package commands.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: b3976d87.

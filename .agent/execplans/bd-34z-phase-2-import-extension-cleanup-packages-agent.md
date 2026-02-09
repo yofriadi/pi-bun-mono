@@ -14,8 +14,8 @@ After this change, TypeScript files in `packages/agent` will reference internal 
 - [x] (2026-02-09 12:56Z) Created this ExecPlan at `.agent/execplans/bd-34z-phase-2-import-extension-cleanup-packages-agent.md`.
 - [x] (2026-02-09 12:56Z) Removed `.js` suffixes from internal relative imports in `packages/agent` TypeScript files.
 - [x] (2026-02-09 12:56Z) Validated that no relative `.js` imports remain in `packages/agent`.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-34z`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-34z`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -82,3 +82,4 @@ No public runtime interfaces or dependencies change. Only relative import string
 
 Revision Note (2026-02-09 12:56Z, Codex): Initial ExecPlan created because issue `bd-34z` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 12:56Z, Codex): Updated progress and outcomes after codemod/validation completion.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 1f5d8009.

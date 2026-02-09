@@ -14,8 +14,8 @@ After this change, TypeScript files in `packages/mom` and `packages/pods` use ex
 - [x] (2026-02-09 13:02Z) Created this ExecPlan at `.agent/execplans/bd-2bs-phase-2-import-extension-cleanup-packages-mom-pods.md`.
 - [x] (2026-02-09 13:03Z) Removed `.js` suffixes from relative imports in `packages/mom/**/*.ts` and `packages/pods/**/*.ts`.
 - [x] (2026-02-09 13:03Z) Validated no relative `.js` imports remain in TypeScript files for both packages.
-- [ ] Commit issue-scoped files and add Beads comment with commit hash.
-- [ ] Close `bd-2bs`, sync state, and fetch next READY issue.
+- [x] (2026-02-09 19:04Z) Commit issue-scoped files and add Beads comment with commit hash.
+- [x] (2026-02-09 19:04Z) Close `bd-2bs`, sync state, and fetch next READY issue.
 
 ## Surprises & Discoveries
 
@@ -100,3 +100,4 @@ No dependencies or runtime behavior are changed. Only internal TypeScript relati
 
 Revision Note (2026-02-09 13:02Z, Codex): Initial ExecPlan created because issue `bd-2bs` had no ExecPlan path and required a self-contained implementation guide.
 Revision Note (2026-02-09 13:03Z, Codex): Updated progress and outcomes after codemod and validation completion.
+Revision Note (2026-02-09 19:04Z, Codex): Backfilled closure markers after issue completion; commit evidence: 5a171612.
