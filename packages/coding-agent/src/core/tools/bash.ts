@@ -4,7 +4,6 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { AgentTool } from "@mariozechner/pi-agent-core";
 import { type Static, Type } from "@sinclair/typebox";
-import { spawn } from "child_process";
 import { getShellConfig, getShellEnv, killProcessTree } from "../../utils/shell";
 import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize, type TruncationResult, truncateTail } from "./truncate";
 
@@ -52,6 +51,30 @@ export interface BashOperations {
 	) => Promise<{ exitCode: number | null }>;
 }
 
+async function streamSpawnOutput(
+	stream: ReadableStream<Uint8Array> | null | undefined,
+	onData: (data: Buffer) => void,
+): Promise<void> {
+	if (!stream) {
+		return;
+	}
+
+	const reader = stream.getReader();
+	try {
+		while (true) {
+			const { value, done } = await reader.read();
+			if (done) {
+				break;
+			}
+			if (value) {
+				onData(Buffer.from(value));
+			}
+		}
+	} finally {
+		reader.releaseLock();
+	}
+}
+
 /**
  * Default bash operations using local shell
  */
@@ -65,12 +88,19 @@ const defaultBashOperations: BashOperations = {
 				return;
 			}
 
-			const child = spawn(shell, [...args, command], {
-				cwd,
-				detached: true,
-				env: env ?? getShellEnv(),
-				stdio: ["ignore", "pipe", "pipe"],
-			});
+			let child: ReturnType<typeof Bun.spawn>;
+			try {
+				child = Bun.spawn([shell, ...args, command], {
+					cwd,
+					env: env ?? getShellEnv(),
+					stdin: "ignore",
+					stdout: "pipe",
+					stderr: "pipe",
+				});
+			} catch (error: any) {
+				reject(error);
+				return;
+			}
 
 			let timedOut = false;
 
@@ -79,32 +109,16 @@ const defaultBashOperations: BashOperations = {
 			if (timeout !== undefined && timeout > 0) {
 				timeoutHandle = setTimeout(() => {
 					timedOut = true;
-					if (child.pid) {
-						killProcessTree(child.pid);
-					}
+					killProcessTree(child.pid);
 				}, timeout * 1000);
 			}
 
-			// Stream stdout and stderr
-			if (child.stdout) {
-				child.stdout.on("data", onData);
-			}
-			if (child.stderr) {
-				child.stderr.on("data", onData);
-			}
-
-			// Handle shell spawn errors
-			child.on("error", (err) => {
-				if (timeoutHandle) clearTimeout(timeoutHandle);
-				if (signal) signal.removeEventListener("abort", onAbort);
-				reject(err);
-			});
+			const stdoutPromise = streamSpawnOutput(child.stdout, onData);
+			const stderrPromise = streamSpawnOutput(child.stderr, onData);
 
 			// Handle abort signal - kill entire process tree
 			const onAbort = () => {
-				if (child.pid) {
-					killProcessTree(child.pid);
-				}
+				killProcessTree(child.pid);
 			};
 
 			if (signal) {
@@ -116,22 +130,32 @@ const defaultBashOperations: BashOperations = {
 			}
 
 			// Handle process exit
-			child.on("close", (code) => {
-				if (timeoutHandle) clearTimeout(timeoutHandle);
-				if (signal) signal.removeEventListener("abort", onAbort);
+			child.exited
+				.then(async (code) => {
+					await Promise.allSettled([stdoutPromise, stderrPromise]);
 
-				if (signal?.aborted) {
-					reject(new Error("aborted"));
-					return;
-				}
+					if (timeoutHandle) clearTimeout(timeoutHandle);
+					if (signal) signal.removeEventListener("abort", onAbort);
 
-				if (timedOut) {
-					reject(new Error(`timeout:${timeout}`));
-					return;
-				}
+					if (signal?.aborted) {
+						reject(new Error("aborted"));
+						return;
+					}
 
-				resolve({ exitCode: code });
-			});
+					if (timedOut) {
+						reject(new Error(`timeout:${timeout}`));
+						return;
+					}
+
+					resolve({ exitCode: code });
+				})
+				.catch(async (err: any) => {
+					await Promise.allSettled([stdoutPromise, stderrPromise]);
+
+					if (timeoutHandle) clearTimeout(timeoutHandle);
+					if (signal) signal.removeEventListener("abort", onAbort);
+					reject(err);
+				});
 		});
 	},
 };

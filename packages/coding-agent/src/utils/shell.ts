@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { delimiter } from "node:path";
-import { spawn, spawnSync } from "child_process";
+import { spawnSync } from "child_process";
 import { getBinDir, getSettingsPath } from "../config";
 import { SettingsManager } from "../core/settings-manager";
 
@@ -179,9 +179,10 @@ export function killProcessTree(pid: number): void {
 	if (process.platform === "win32") {
 		// Use taskkill on Windows to kill process tree
 		try {
-			spawn("taskkill", ["/F", "/T", "/PID", String(pid)], {
-				stdio: "ignore",
-				detached: true,
+			Bun.spawn(["taskkill", "/F", "/T", "/PID", String(pid)], {
+				stdin: "ignore",
+				stdout: "ignore",
+				stderr: "ignore",
 			});
 		} catch {
 			// Ignore errors if taskkill fails
