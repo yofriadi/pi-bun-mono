@@ -16,7 +16,7 @@ if (typeof process !== "undefined" && (process.versions?.node || process.version
 	});
 }
 
-import type { KnownProvider } from "./types.js";
+import type { KnownProvider } from "./types";
 
 let cachedVertexAdcCredentialsExists: boolean | null = null;
 

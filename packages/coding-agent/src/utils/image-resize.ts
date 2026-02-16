@@ -1,5 +1,5 @@
 import type { ImageContent } from "@mariozechner/pi-ai";
-import { loadPhoton } from "./photon.js";
+import { loadPhoton } from "./photon";
 
 export interface ImageResizeOptions {
 	maxWidth?: number; // Default: 2000

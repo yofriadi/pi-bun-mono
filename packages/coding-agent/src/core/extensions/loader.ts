@@ -18,13 +18,13 @@ import * as _bundledPiTui from "@mariozechner/pi-tui";
 // These MUST be static so Bun bundles them into the compiled binary.
 // The virtualModules option then makes them available to extensions.
 import * as _bundledTypebox from "@sinclair/typebox";
-import { getAgentDir, isBunBinary } from "../../config.js";
+import { getAgentDir, isBunBinary } from "../../config";
 // NOTE: This import works because loader.ts exports are NOT re-exported from index.ts,
 // avoiding a circular dependency. Extensions can import from @mariozechner/pi-coding-agent.
-import * as _bundledPiCodingAgent from "../../index.js";
-import { createEventBus, type EventBus } from "../event-bus.js";
-import type { ExecOptions } from "../exec.js";
-import { execCommand } from "../exec.js";
+import * as _bundledPiCodingAgent from "../../index";
+import { createEventBus, type EventBus } from "../event-bus";
+import type { ExecOptions } from "../exec";
+import { execCommand } from "../exec";
 import type {
 	Extension,
 	ExtensionAPI,
@@ -35,7 +35,7 @@ import type {
 	ProviderConfig,
 	RegisteredCommand,
 	ToolDefinition,
-} from "./types.js";
+} from "./types";
 
 /** Modules available to extensions via virtualModules (for compiled Bun binary) */
 const VIRTUAL_MODULES: Record<string, unknown> = {
@@ -48,6 +48,75 @@ const VIRTUAL_MODULES: Record<string, unknown> = {
 
 const require = createRequire(import.meta.url);
 
+function findNodeModulePackageDir(specifier: string): string | undefined {
+	const parts = specifier.split("/");
+	let dir = path.dirname(fileURLToPath(import.meta.url));
+	while (true) {
+		const candidate = path.join(dir, "node_modules", ...parts);
+		if (fs.existsSync(candidate)) {
+			return candidate;
+		}
+		const parent = path.dirname(dir);
+		if (parent === dir) break;
+		dir = parent;
+	}
+	return undefined;
+}
+
+function resolveFromPackageDir(specifier: string): string | undefined {
+	const packageDir = findNodeModulePackageDir(specifier);
+	if (!packageDir) return undefined;
+
+	const packageJsonPath = path.join(packageDir, "package.json");
+	if (!fs.existsSync(packageJsonPath)) return undefined;
+
+	try {
+		const pkg = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8")) as {
+			exports?: unknown;
+			main?: string;
+			module?: string;
+		};
+		const dotExport =
+			typeof pkg.exports === "object" && pkg.exports !== null
+				? (pkg.exports as Record<string, unknown>)["."]
+				: undefined;
+		const entry =
+			(typeof dotExport === "string"
+				? dotExport
+				: dotExport && typeof dotExport === "object"
+					? ((dotExport as Record<string, unknown>).import ??
+						(dotExport as Record<string, unknown>).default ??
+						(dotExport as Record<string, unknown>).require ??
+						(dotExport as Record<string, unknown>).types)
+					: undefined) ??
+			pkg.module ??
+			pkg.main;
+
+		if (typeof entry === "string") {
+			return path.resolve(packageDir, entry);
+		}
+	} catch {
+		// Fall through to defaults
+	}
+
+	const indexJs = path.join(packageDir, "index.js");
+	if (fs.existsSync(indexJs)) return indexJs;
+	const indexTs = path.join(packageDir, "index.ts");
+	if (fs.existsSync(indexTs)) return indexTs;
+	return undefined;
+}
+
+function resolveModulePath(specifier: string): string {
+	try {
+		const resolved = import.meta.resolve(specifier);
+		return resolved.startsWith("file://") ? fileURLToPath(resolved) : resolved;
+	} catch {
+		const resolvedFromNodeModules = resolveFromPackageDir(specifier);
+		if (resolvedFromNodeModules) return resolvedFromNodeModules;
+		return require.resolve(specifier);
+	}
+}
+
 /**
  * Get aliases for jiti (used in Node.js/development mode).
  * In Bun binary mode, virtualModules is used instead.
@@ -57,16 +126,20 @@ function getAliases(): Record<string, string> {
 	if (_aliases) return _aliases;
 
 	const __dirname = path.dirname(fileURLToPath(import.meta.url));
-	const packageIndex = path.resolve(__dirname, "../..", "index.js");
+	const packageIndexJs = path.resolve(__dirname, "../..", "index.js");
+	const packageIndexTs = path.resolve(__dirname, "../..", "index.ts");
+	const packageIndex = fs.existsSync(packageIndexJs) ? packageIndexJs : packageIndexTs;
 
-	const typeboxEntry = require.resolve("@sinclair/typebox");
-	const typeboxRoot = typeboxEntry.replace(/\/build\/cjs\/index\.js$/, "");
+	const typeboxEntry = resolveModulePath("@sinclair/typebox");
+	const typeboxRoot = typeboxEntry
+		.replace(/[/\\]build[/\\]cjs[/\\]index\.js$/, "")
+		.replace(/[/\\]build[/\\]esm[/\\]index\.mjs$/, "");
 
 	_aliases = {
 		"@mariozechner/pi-coding-agent": packageIndex,
-		"@mariozechner/pi-agent-core": require.resolve("@mariozechner/pi-agent-core"),
-		"@mariozechner/pi-tui": require.resolve("@mariozechner/pi-tui"),
-		"@mariozechner/pi-ai": require.resolve("@mariozechner/pi-ai"),
+		"@mariozechner/pi-agent-core": resolveModulePath("@mariozechner/pi-agent-core"),
+		"@mariozechner/pi-tui": resolveModulePath("@mariozechner/pi-tui"),
+		"@mariozechner/pi-ai": resolveModulePath("@mariozechner/pi-ai"),
 		"@sinclair/typebox": typeboxRoot,
 	};
 
@@ -162,7 +235,7 @@ function createExtensionAPI(
 			shortcut: KeyId,
 			options: {
 				description?: string;
-				handler: (ctx: import("./types.js").ExtensionContext) => Promise<void> | void;
+				handler: (ctx: import("./types").ExtensionContext) => Promise<void> | void;
 			},
 		): void {
 			extension.shortcuts.set(shortcut, { shortcut, extensionPath: extension.path, ...options });

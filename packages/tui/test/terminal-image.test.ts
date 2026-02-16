@@ -4,7 +4,7 @@
 
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { isImageLine } from "../src/terminal-image.js";
+import { isImageLine } from "../src/terminal-image";
 
 describe("isImageLine", () => {
 	describe("iTerm2 image protocol", () => {

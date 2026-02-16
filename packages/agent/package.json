@@ -1,23 +1,26 @@
 {
 	"name": "@mariozechner/pi-agent-core",
-	"version": "0.52.12",
+	"version": "0.52.9",
 	"description": "General-purpose agent with transport abstraction, state management, and attachment support",
 	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"import": "./src/index.ts"
+		}
+	},
 	"files": [
 		"dist",
 		"README.md"
 	],
 	"scripts": {
-		"clean": "rm -rf dist",
-		"build": "tsgo -p tsconfig.build.json",
-		"dev": "tsgo -p tsconfig.build.json --watch --preserveWatchOutput",
-		"test": "vitest --run",
-		"prepublishOnly": "npm run clean && npm run build"
+		"test": "vitest --run"
 	},
 	"dependencies": {
-		"@mariozechner/pi-ai": "^0.52.12"
+		"@sinclair/typebox": "^0.34.41",
+		"@mariozechner/pi-ai": "^0.52.9"
 	},
 	"keywords": [
 		"ai",
@@ -34,7 +37,7 @@
 		"directory": "packages/agent"
 	},
 	"engines": {
-		"node": ">=20.0.0"
+		"bun": ">=1.3.7"
 	},
 	"devDependencies": {
 		"@types/node": "^24.3.0",

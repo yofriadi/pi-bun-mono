@@ -1,6 +1,5 @@
 import {
 	BedrockRuntimeClient,
-	type BedrockRuntimeClientConfig,
 	StopReason as BedrockStopReason,
 	type Tool as BedrockTool,
 	CachePointType,
@@ -20,7 +19,7 @@ import {
 	ToolResultStatus,
 } from "@aws-sdk/client-bedrock-runtime";
 
-import { calculateCost } from "../models.js";
+import { calculateCost } from "../models";
 import type {
 	Api,
 	AssistantMessage,
@@ -38,12 +37,12 @@ import type {
 	Tool,
 	ToolCall,
 	ToolResultMessage,
-} from "../types.js";
-import { AssistantMessageEventStream } from "../utils/event-stream.js";
-import { parseStreamingJson } from "../utils/json-parse.js";
-import { sanitizeSurrogates } from "../utils/sanitize-unicode.js";
-import { adjustMaxTokensForThinking, buildBaseOptions, clampReasoning } from "./simple-options.js";
-import { transformMessages } from "./transform-messages.js";
+} from "../types";
+import { AssistantMessageEventStream } from "../utils/event-stream";
+import { parseStreamingJson } from "../utils/json-parse";
+import { sanitizeSurrogates } from "../utils/sanitize-unicode";
+import { adjustMaxTokensForThinking, buildBaseOptions, clampReasoning } from "./simple-options";
+import { transformMessages } from "./transform-messages";
 
 export interface BedrockOptions extends StreamOptions {
 	region?: string;
@@ -87,7 +86,7 @@ export const streamBedrock: StreamFunction<"bedrock-converse-stream", BedrockOpt
 
 		const blocks = output.content as Block[];
 
-		const config: BedrockRuntimeClientConfig = {
+		const config: any = {
 			region: options.region,
 			profile: options.profile,
 		};
@@ -148,7 +147,7 @@ export const streamBedrock: StreamFunction<"bedrock-converse-stream", BedrockOpt
 			options?.onPayload?.(commandInput);
 			const command = new ConverseStreamCommand(commandInput);
 
-			const response = await client.send(command, { abortSignal: options.signal });
+			const response = await (client as any).send(command, { abortSignal: options.signal });
 
 			for await (const item of response.stream!) {
 				if (item.messageStart) {

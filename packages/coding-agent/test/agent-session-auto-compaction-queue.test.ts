@@ -4,12 +4,12 @@ import { join } from "node:path";
 import { Agent } from "@mariozechner/pi-agent-core";
 import { getModel } from "@mariozechner/pi-ai";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { AgentSession } from "../src/core/agent-session.js";
-import { AuthStorage } from "../src/core/auth-storage.js";
-import { ModelRegistry } from "../src/core/model-registry.js";
-import { SessionManager } from "../src/core/session-manager.js";
-import { SettingsManager } from "../src/core/settings-manager.js";
-import { createTestResourceLoader } from "./utilities.js";
+import { AgentSession } from "../src/core/agent-session";
+import { AuthStorage } from "../src/core/auth-storage";
+import { ModelRegistry } from "../src/core/model-registry";
+import { SessionManager } from "../src/core/session-manager";
+import { SettingsManager } from "../src/core/settings-manager";
+import { createTestResourceLoader } from "./utilities";
 
 vi.mock("../src/core/compaction/index.js", () => ({
 	calculateContextTokens: () => 0,

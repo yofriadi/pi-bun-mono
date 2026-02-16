@@ -12,10 +12,10 @@
 
 import { Type } from "@sinclair/typebox";
 import { describe, expect, it } from "vitest";
-import { getModel } from "../src/models.js";
-import { completeSimple, getEnvApiKey } from "../src/stream.js";
-import type { AssistantMessage, Message, Tool, ToolResultMessage } from "../src/types.js";
-import { resolveApiKey } from "./oauth.js";
+import { getModel } from "../src/models";
+import { completeSimple, getEnvApiKey } from "../src/stream";
+import type { AssistantMessage, Message, Tool, ToolResultMessage } from "../src/types";
+import { resolveApiKey } from "./oauth";
 
 // Resolve API keys
 const copilotToken = await resolveApiKey("github-copilot");

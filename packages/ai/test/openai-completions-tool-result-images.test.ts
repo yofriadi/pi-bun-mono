@@ -1,14 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { getModel } from "../src/models.js";
-import { convertMessages } from "../src/providers/openai-completions.js";
-import type {
-	AssistantMessage,
-	Context,
-	Model,
-	OpenAICompletionsCompat,
-	ToolResultMessage,
-	Usage,
-} from "../src/types.js";
+import { getModel } from "../src/models";
+import { convertMessages } from "../src/providers/openai-completions";
+import type { AssistantMessage, Context, Model, OpenAICompletionsCompat, ToolResultMessage, Usage } from "../src/types";
 
 const emptyUsage: Usage = {
 	input: 0,

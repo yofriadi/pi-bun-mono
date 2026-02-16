@@ -2,8 +2,8 @@
  * System prompt construction and project context loading
  */
 
-import { getDocsPath, getExamplesPath, getReadmePath } from "../config.js";
-import { formatSkillsForPrompt, type Skill } from "./skills.js";
+import { getDocsPath, getExamplesPath, getReadmePath } from "../config";
+import { formatSkillsForPrompt, type Skill } from "./skills";
 
 /** Tool descriptions for system prompt */
 const toolDescriptions: Record<string, string> = {

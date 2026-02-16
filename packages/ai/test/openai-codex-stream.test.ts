@@ -2,8 +2,8 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { streamOpenAICodexResponses } from "../src/providers/openai-codex-responses.js";
-import type { Context, Model } from "../src/types.js";
+import { streamOpenAICodexResponses } from "../src/providers/openai-codex-responses";
+import type { Context, Model } from "../src/types";
 
 const originalFetch = global.fetch;
 const originalAgentDir = process.env.PI_CODING_AGENT_DIR;
@@ -92,7 +92,7 @@ describe("openai-codex streaming", () => {
 			return new Response("not found", { status: 404 });
 		});
 
-		global.fetch = fetchMock as typeof fetch;
+		global.fetch = fetchMock as unknown as typeof fetch;
 
 		const model: Model<"openai-codex-responses"> = {
 			id: "gpt-5.1-codex",
@@ -207,7 +207,7 @@ describe("openai-codex streaming", () => {
 			return new Response("not found", { status: 404 });
 		});
 
-		global.fetch = fetchMock as typeof fetch;
+		global.fetch = fetchMock as unknown as typeof fetch;
 
 		const model: Model<"openai-codex-responses"> = {
 			id: "gpt-5.1-codex",
@@ -300,7 +300,7 @@ describe("openai-codex streaming", () => {
 			return new Response("not found", { status: 404 });
 		});
 
-		global.fetch = fetchMock as typeof fetch;
+		global.fetch = fetchMock as unknown as typeof fetch;
 
 		const model: Model<"openai-codex-responses"> = {
 			id: "gpt-5.3-codex",
@@ -398,7 +398,7 @@ describe("openai-codex streaming", () => {
 			return new Response("not found", { status: 404 });
 		});
 
-		global.fetch = fetchMock as typeof fetch;
+		global.fetch = fetchMock as unknown as typeof fetch;
 
 		const model: Model<"openai-codex-responses"> = {
 			id: "gpt-5.1-codex",

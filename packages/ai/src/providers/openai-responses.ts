@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import type { ResponseCreateParamsStreaming } from "openai/resources/responses/responses.js";
-import { getEnvApiKey } from "../env-api-keys.js";
-import { supportsXhigh } from "../models.js";
+import { getEnvApiKey } from "../env-api-keys";
+import { supportsXhigh } from "../models";
 import type {
 	Api,
 	AssistantMessage,
@@ -12,11 +12,10 @@ import type {
 	StreamFunction,
 	StreamOptions,
 	Usage,
-} from "../types.js";
-import { AssistantMessageEventStream } from "../utils/event-stream.js";
-import { buildCopilotDynamicHeaders, hasCopilotVisionInput } from "./github-copilot-headers.js";
-import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared.js";
-import { buildBaseOptions, clampReasoning } from "./simple-options.js";
+} from "../types";
+import { AssistantMessageEventStream } from "../utils/event-stream";
+import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared";
+import { buildBaseOptions, clampReasoning } from "./simple-options";
 
 const OPENAI_TOOL_CALL_PROVIDERS = new Set(["openai", "openai-codex", "opencode"]);
 
@@ -160,12 +159,28 @@ function createClient(
 
 	const headers = { ...model.headers };
 	if (model.provider === "github-copilot") {
-		const hasImages = hasCopilotVisionInput(context.messages);
-		const copilotHeaders = buildCopilotDynamicHeaders({
-			messages: context.messages,
-			hasImages,
+		// Copilot expects X-Initiator to indicate whether the request is user-initiated
+		// or agent-initiated (e.g. follow-up after assistant/tool messages). If there is
+		// no prior message, default to user-initiated.
+		const messages = context.messages || [];
+		const lastMessage = messages[messages.length - 1];
+		const isAgentCall = lastMessage ? lastMessage.role !== "user" : false;
+		headers["X-Initiator"] = isAgentCall ? "agent" : "user";
+		headers["Openai-Intent"] = "conversation-edits";
+
+		// Copilot requires this header when sending images
+		const hasImages = messages.some((msg) => {
+			if (msg.role === "user" && Array.isArray(msg.content)) {
+				return msg.content.some((c) => c.type === "image");
+			}
+			if (msg.role === "toolResult" && Array.isArray(msg.content)) {
+				return msg.content.some((c) => c.type === "image");
+			}
+			return false;
 		});
-		Object.assign(headers, copilotHeaders);
+		if (hasImages) {
+			headers["Copilot-Vision-Request"] = "true";
+		}
 	}
 
 	// Merge options headers last so they can override defaults

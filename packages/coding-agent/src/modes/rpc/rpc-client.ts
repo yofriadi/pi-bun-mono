@@ -8,10 +8,10 @@ import { type ChildProcess, spawn } from "node:child_process";
 import * as readline from "node:readline";
 import type { AgentEvent, AgentMessage, ThinkingLevel } from "@mariozechner/pi-agent-core";
 import type { ImageContent } from "@mariozechner/pi-ai";
-import type { SessionStats } from "../../core/agent-session.js";
-import type { BashResult } from "../../core/bash-executor.js";
-import type { CompactionResult } from "../../core/compaction/index.js";
-import type { RpcCommand, RpcResponse, RpcSessionState, RpcSlashCommand } from "./rpc-types.js";
+import type { SessionStats } from "../../core/agent-session";
+import type { BashResult } from "../../core/bash-executor";
+import type { CompactionResult } from "../../core/compaction/index";
+import type { RpcCommand, RpcResponse, RpcSessionState, RpcSlashCommand } from "./rpc-types";
 
 // ============================================================================
 // Types
@@ -105,7 +105,7 @@ export class RpcClient {
 		});
 
 		// Wait a moment for process to initialize
-		await new Promise((resolve) => setTimeout(resolve, 100));
+		await Bun.sleep(100);
 
 		if (this.process.exitCode !== null) {
 			throw new Error(`Agent process exited immediately with code ${this.process.exitCode}. Stderr: ${this.stderr}`);

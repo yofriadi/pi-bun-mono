@@ -6,9 +6,9 @@
  */
 
 import type { ImageContent, TextContent } from "@mariozechner/pi-ai";
-import type { Theme } from "../../modes/interactive/theme/theme.js";
-import type { ToolDefinition } from "../extensions/types.js";
-import { ansiLinesToHtml } from "./ansi-to-html.js";
+import type { Theme } from "../../modes/interactive/theme/theme";
+import type { ToolDefinition } from "../extensions/types";
+import { ansiLinesToHtml } from "./ansi-to-html";
 
 export interface ToolHtmlRendererDeps {
 	/** Function to look up tool definition by name */

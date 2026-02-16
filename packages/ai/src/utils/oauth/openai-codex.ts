@@ -17,8 +17,8 @@ if (typeof process !== "undefined" && (process.versions?.node || process.version
 	});
 }
 
-import { generatePKCE } from "./pkce.js";
-import type { OAuthCredentials, OAuthLoginCallbacks, OAuthPrompt, OAuthProviderInterface } from "./types.js";
+import { generatePKCE } from "./pkce";
+import type { OAuthCredentials, OAuthLoginCallbacks, OAuthPrompt, OAuthProviderInterface } from "./types";
 
 const CLIENT_ID = "app_EMoamEEZ73f0CkXaXp7hrann";
 const AUTHORIZE_URL = "https://auth.openai.com/oauth/authorize";
@@ -253,7 +253,7 @@ function startLocalOAuthServer(state: string): Promise<OAuthServerInfo> {
 						cancelled = true;
 					},
 					waitForCode: async () => {
-						const sleep = () => new Promise((r) => setTimeout(r, 100));
+						const sleep = () => new Promise<void>((resolve) => setTimeout(resolve, 100));
 						for (let i = 0; i < 600; i += 1) {
 							if (lastCode) return { code: lastCode };
 							if (cancelled) return null;

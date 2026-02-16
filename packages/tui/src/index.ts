@@ -6,24 +6,24 @@ export {
 	type AutocompleteProvider,
 	CombinedAutocompleteProvider,
 	type SlashCommand,
-} from "./autocomplete.js";
+} from "./autocomplete";
 // Components
-export { Box } from "./components/box.js";
-export { CancellableLoader } from "./components/cancellable-loader.js";
-export { Editor, type EditorOptions, type EditorTheme } from "./components/editor.js";
-export { Image, type ImageOptions, type ImageTheme } from "./components/image.js";
-export { Input } from "./components/input.js";
-export { Loader } from "./components/loader.js";
-export { type DefaultTextStyle, Markdown, type MarkdownTheme } from "./components/markdown.js";
-export { type SelectItem, SelectList, type SelectListTheme } from "./components/select-list.js";
-export { type SettingItem, SettingsList, type SettingsListTheme } from "./components/settings-list.js";
-export { Spacer } from "./components/spacer.js";
-export { Text } from "./components/text.js";
-export { TruncatedText } from "./components/truncated-text.js";
+export { Box } from "./components/box";
+export { CancellableLoader } from "./components/cancellable-loader";
+export { Editor, type EditorOptions, type EditorTheme } from "./components/editor";
+export { Image, type ImageOptions, type ImageTheme } from "./components/image";
+export { Input } from "./components/input";
+export { Loader } from "./components/loader";
+export { type DefaultTextStyle, Markdown, type MarkdownTheme } from "./components/markdown";
+export { type SelectItem, SelectList, type SelectListTheme } from "./components/select-list";
+export { type SettingItem, SettingsList, type SettingsListTheme } from "./components/settings-list";
+export { Spacer } from "./components/spacer";
+export { Text } from "./components/text";
+export { TruncatedText } from "./components/truncated-text";
 // Editor component interface (for custom editors)
-export type { EditorComponent } from "./editor-component.js";
+export type { EditorComponent } from "./editor-component";
 // Fuzzy matching
-export { type FuzzyMatch, fuzzyFilter, fuzzyMatch } from "./fuzzy.js";
+export { type FuzzyMatch, fuzzyFilter, fuzzyMatch } from "./fuzzy";
 // Keybindings
 export {
 	DEFAULT_EDITOR_KEYBINDINGS,
@@ -32,7 +32,7 @@ export {
 	EditorKeybindingsManager,
 	getEditorKeybindings,
 	setEditorKeybindings,
-} from "./keybindings.js";
+} from "./keybindings";
 // Keyboard input handling
 export {
 	isKeyRelease,
@@ -44,11 +44,11 @@ export {
 	matchesKey,
 	parseKey,
 	setKittyProtocolActive,
-} from "./keys.js";
+} from "./keys";
 // Input buffering for batch splitting
-export { StdinBuffer, type StdinBufferEventMap, type StdinBufferOptions } from "./stdin-buffer.js";
+export { StdinBuffer, type StdinBufferEventMap, type StdinBufferOptions } from "./stdin-buffer";
 // Terminal interface and implementations
-export { ProcessTerminal, type Terminal } from "./terminal.js";
+export { ProcessTerminal, type Terminal } from "./terminal";
 // Terminal image support
 export {
 	allocateImageId,
@@ -74,7 +74,7 @@ export {
 	resetCapabilitiesCache,
 	setCellDimensions,
 	type TerminalCapabilities,
-} from "./terminal-image.js";
+} from "./terminal-image";
 export {
 	type Component,
 	Container,
@@ -87,6 +87,6 @@ export {
 	type OverlayOptions,
 	type SizeValue,
 	TUI,
-} from "./tui.js";
+} from "./tui";
 // Utilities
-export { truncateToWidth, visibleWidth, wrapTextWithAnsi } from "./utils.js";
+export { truncateToWidth, visibleWidth, wrapTextWithAnsi } from "./utils";

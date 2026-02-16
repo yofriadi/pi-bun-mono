@@ -10,8 +10,8 @@ import {
 	Spacer,
 	Text,
 } from "@mariozechner/pi-tui";
-import { getSelectListTheme, getSettingsListTheme, theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
+import { getSelectListTheme, getSettingsListTheme, theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
 
 const THINKING_DESCRIPTIONS: Record<ThinkingLevel, string> = {
 	off: "No reasoning",

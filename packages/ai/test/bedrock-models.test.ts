@@ -17,10 +17,10 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { getModels } from "../src/models.js";
-import { complete } from "../src/stream.js";
-import type { Context } from "../src/types.js";
-import { hasBedrockCredentials } from "./bedrock-utils.js";
+import { getModels } from "../src/models";
+import { complete } from "../src/stream";
+import type { Context } from "../src/types";
+import { hasBedrockCredentials } from "./bedrock-utils";
 
 describe("Amazon Bedrock Models", () => {
 	const models = getModels("amazon-bedrock");
