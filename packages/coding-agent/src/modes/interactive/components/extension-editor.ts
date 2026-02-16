@@ -16,10 +16,10 @@ import {
 	Text,
 	type TUI,
 } from "@mariozechner/pi-tui";
-import type { KeybindingsManager } from "../../../core/keybindings.js";
-import { getEditorTheme, theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
-import { appKeyHint, keyHint } from "./keybinding-hints.js";
+import type { KeybindingsManager } from "../../../core/keybindings";
+import { getEditorTheme, theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
+import { appKeyHint, keyHint } from "./keybinding-hints";
 
 export class ExtensionEditorComponent extends Container {
 	private editor: Editor;

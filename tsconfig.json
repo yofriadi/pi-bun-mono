@@ -26,5 +26,12 @@
 		}
 	},
 	"include": ["packages/*/src/**/*", "packages/*/test/**/*", "packages/coding-agent/examples/**/*"],
-	"exclude": ["packages/web-ui/**/*", "**/dist/**"]
+	"exclude": [
+		"packages/web-ui/**/*",
+		"**/dist/**",
+		"packages/coding-agent/examples/extensions/ast/**/*",
+		"packages/coding-agent/examples/extensions/lsp/**/*",
+		"packages/coding-agent/examples/extensions/mcp/**/*",
+		"packages/coding-agent/examples/extensions/web-access/**/*"
+	]
 }

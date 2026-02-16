@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import { delimiter } from "node:path";
-import { spawn, spawnSync } from "child_process";
-import { getBinDir, getSettingsPath } from "../config.js";
-import { SettingsManager } from "../core/settings-manager.js";
+import { spawnSync } from "child_process";
+import { getBinDir, getSettingsPath } from "../config";
+import { SettingsManager } from "../core/settings-manager";
 
 let cachedShellConfig: { shell: string; args: string[] } | null = null;
 
@@ -179,10 +179,17 @@ export function killProcessTree(pid: number): void {
 	if (process.platform === "win32") {
 		// Use taskkill on Windows to kill process tree
 		try {
-			spawn("taskkill", ["/F", "/T", "/PID", String(pid)], {
-				stdio: "ignore",
-				detached: true,
-			});
+			if (typeof Bun !== "undefined") {
+				Bun.spawn(["taskkill", "/F", "/T", "/PID", String(pid)], {
+					stdin: "ignore",
+					stdout: "ignore",
+					stderr: "ignore",
+				});
+			} else {
+				spawnSync("taskkill", ["/F", "/T", "/PID", String(pid)], {
+					stdio: "ignore",
+				});
+			}
 		} catch {
 			// Ignore errors if taskkill fails
 		}

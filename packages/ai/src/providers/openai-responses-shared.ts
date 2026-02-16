@@ -11,7 +11,7 @@ import type {
 	ResponseReasoningItem,
 	ResponseStreamEvent,
 } from "openai/resources/responses/responses.js";
-import { calculateCost } from "../models.js";
+import { calculateCost } from "../models";
 import type {
 	Api,
 	AssistantMessage,
@@ -24,11 +24,11 @@ import type {
 	Tool,
 	ToolCall,
 	Usage,
-} from "../types.js";
-import type { AssistantMessageEventStream } from "../utils/event-stream.js";
-import { parseStreamingJson } from "../utils/json-parse.js";
-import { sanitizeSurrogates } from "../utils/sanitize-unicode.js";
-import { transformMessages } from "./transform-messages.js";
+} from "../types";
+import type { AssistantMessageEventStream } from "../utils/event-stream";
+import { parseStreamingJson } from "../utils/json-parse";
+import { sanitizeSurrogates } from "../utils/sanitize-unicode";
+import { transformMessages } from "./transform-messages";
 
 // =============================================================================
 // Utilities

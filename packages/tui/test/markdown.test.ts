@@ -2,10 +2,10 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import type { Terminal as XtermTerminalType } from "@xterm/headless";
 import { Chalk } from "chalk";
-import { Markdown } from "../src/components/markdown.js";
-import { type Component, TUI } from "../src/tui.js";
-import { defaultMarkdownTheme } from "./test-themes.js";
-import { VirtualTerminal } from "./virtual-terminal.js";
+import { Markdown } from "../src/components/markdown";
+import { type Component, TUI } from "../src/tui";
+import { defaultMarkdownTheme } from "./test-themes";
+import { VirtualTerminal } from "./virtual-terminal";
 
 // Force full color in CI so ANSI assertions are deterministic
 const chalk = new Chalk({ level: 3 });

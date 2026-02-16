@@ -5,7 +5,9 @@ import { type Static, Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import chalk from "chalk";
 import { highlight, supportsLanguage } from "cli-highlight";
-import { getCustomThemesDir, getThemesDir } from "../../../config.js";
+import { getCustomThemesDir, getThemesDir } from "../../../config";
+import darkThemeJson from "./dark.json";
+import lightThemeJson from "./light.json";
 
 // ============================================================================
 // Types & Schema
@@ -91,9 +93,9 @@ const ThemeJsonSchema = Type.Object({
 	),
 });
 
-type ThemeJson = Static<typeof ThemeJsonSchema>;
+type ThemeJson = Static<any>;
 
-const validateThemeJson = TypeCompiler.Compile(ThemeJsonSchema);
+const validateThemeJson = TypeCompiler.Compile(ThemeJsonSchema as any);
 
 export type ThemeColor =
 	| "accent"
@@ -443,9 +445,16 @@ function getBuiltinThemes(): Record<string, ThemeJson> {
 		const themesDir = getThemesDir();
 		const darkPath = path.join(themesDir, "dark.json");
 		const lightPath = path.join(themesDir, "light.json");
+		const loadTheme = (themePath: string, fallback: ThemeJson): ThemeJson => {
+			try {
+				return JSON.parse(fs.readFileSync(themePath, "utf-8")) as ThemeJson;
+			} catch {
+				return fallback;
+			}
+		};
 		BUILTIN_THEMES = {
-			dark: JSON.parse(fs.readFileSync(darkPath, "utf-8")) as ThemeJson,
-			light: JSON.parse(fs.readFileSync(lightPath, "utf-8")) as ThemeJson,
+			dark: loadTheme(darkPath, darkThemeJson as ThemeJson),
+			light: loadTheme(lightPath, lightThemeJson as ThemeJson),
 		};
 	}
 	return BUILTIN_THEMES;

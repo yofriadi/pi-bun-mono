@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { Input } from "../src/components/input.js";
+import { Input } from "../src/components/input";
 
 describe("Input component", () => {
 	it("submits value including backslash on Enter", () => {

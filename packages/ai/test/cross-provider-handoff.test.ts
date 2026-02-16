@@ -25,11 +25,11 @@
 import { Type } from "@sinclair/typebox";
 import { writeFileSync } from "fs";
 import { beforeAll, describe, expect, it } from "vitest";
-import { getModel } from "../src/models.js";
-import { completeSimple, getEnvApiKey } from "../src/stream.js";
-import type { Api, AssistantMessage, Message, Model, Tool, ToolResultMessage } from "../src/types.js";
-import { hasAzureOpenAICredentials } from "./azure-utils.js";
-import { resolveApiKey } from "./oauth.js";
+import { getModel } from "../src/models";
+import { completeSimple, getEnvApiKey } from "../src/stream";
+import type { Api, AssistantMessage, Message, Model, Tool, ToolResultMessage } from "../src/types";
+import { hasAzureOpenAICredentials } from "./azure-utils";
+import { resolveApiKey } from "./oauth";
 
 // Simple tool for testing
 const testToolSchema = Type.Object({

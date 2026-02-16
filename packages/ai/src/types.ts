@@ -1,6 +1,6 @@
-import type { AssistantMessageEventStream } from "./utils/event-stream.js";
+import type { AssistantMessageEventStream } from "./utils/event-stream";
 
-export type { AssistantMessageEventStream } from "./utils/event-stream.js";
+export type { AssistantMessageEventStream } from "./utils/event-stream";
 
 export type KnownApi =
 	| "openai-completions"

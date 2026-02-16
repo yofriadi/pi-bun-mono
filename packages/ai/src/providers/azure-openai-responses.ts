@@ -1,7 +1,7 @@
 import { AzureOpenAI } from "openai";
 import type { ResponseCreateParamsStreaming } from "openai/resources/responses/responses.js";
-import { getEnvApiKey } from "../env-api-keys.js";
-import { supportsXhigh } from "../models.js";
+import { getEnvApiKey } from "../env-api-keys";
+import { supportsXhigh } from "../models";
 import type {
 	Api,
 	AssistantMessage,
@@ -10,10 +10,10 @@ import type {
 	SimpleStreamOptions,
 	StreamFunction,
 	StreamOptions,
-} from "../types.js";
-import { AssistantMessageEventStream } from "../utils/event-stream.js";
-import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared.js";
-import { buildBaseOptions, clampReasoning } from "./simple-options.js";
+} from "../types";
+import { AssistantMessageEventStream } from "../utils/event-stream";
+import { convertResponsesMessages, convertResponsesTools, processResponsesStream } from "./openai-responses-shared";
+import { buildBaseOptions, clampReasoning } from "./simple-options";
 
 const DEFAULT_AZURE_API_VERSION = "v1";
 const AZURE_TOOL_CALL_PROVIDERS = new Set(["openai", "openai-codex", "opencode", "azure-openai-responses"]);

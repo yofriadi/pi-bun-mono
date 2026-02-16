@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
-import { setKittyProtocolActive } from "./keys.js";
-import { StdinBuffer } from "./stdin-buffer.js";
+import { setKittyProtocolActive } from "./keys";
+import { StdinBuffer } from "./stdin-buffer";
 
 /**
  * Minimal terminal interface for TUI
@@ -184,7 +184,7 @@ export class ProcessTerminal implements Terminal {
 				const timeLeft = endTime - now;
 				if (timeLeft <= 0) break;
 				if (now - lastDataTime >= idleMs) break;
-				await new Promise((resolve) => setTimeout(resolve, Math.min(idleMs, timeLeft)));
+				await Bun.sleep(Math.min(idleMs, timeLeft));
 			}
 		} finally {
 			process.stdin.removeListener("data", onData);

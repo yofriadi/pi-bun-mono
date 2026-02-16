@@ -13,7 +13,6 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "rootDir": "./src",
     "outDir": "./dist"
   },
   "include": ["src/**/*"]

@@ -12,16 +12,16 @@ import {
 	truncateToWidth,
 } from "@mariozechner/pi-tui";
 import stripAnsi from "strip-ansi";
-import type { ToolDefinition } from "../../../core/extensions/types.js";
-import { computeEditDiff, type EditDiffError, type EditDiffResult } from "../../../core/tools/edit-diff.js";
-import { allTools } from "../../../core/tools/index.js";
-import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize } from "../../../core/tools/truncate.js";
-import { convertToPng } from "../../../utils/image-convert.js";
-import { sanitizeBinaryOutput } from "../../../utils/shell.js";
-import { getLanguageFromPath, highlightCode, theme } from "../theme/theme.js";
-import { renderDiff } from "./diff.js";
-import { keyHint } from "./keybinding-hints.js";
-import { truncateToVisualLines } from "./visual-truncate.js";
+import type { ToolDefinition } from "../../../core/extensions/types";
+import { computeEditDiff, type EditDiffError, type EditDiffResult } from "../../../core/tools/edit-diff";
+import { allTools } from "../../../core/tools/index";
+import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize } from "../../../core/tools/truncate";
+import { convertToPng } from "../../../utils/image-convert";
+import { sanitizeBinaryOutput } from "../../../utils/shell";
+import { getLanguageFromPath, highlightCode, theme } from "../theme/theme";
+import { renderDiff } from "./diff";
+import { keyHint } from "./keybinding-hints";
+import { truncateToVisualLines } from "./visual-truncate";
 
 // Preview line limit for bash when not expanded
 const BASH_PREVIEW_LINES = 5;

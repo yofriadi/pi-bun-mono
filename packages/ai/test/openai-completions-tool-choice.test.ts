@@ -1,8 +1,8 @@
 import { Type } from "@sinclair/typebox";
 import { describe, expect, it, vi } from "vitest";
-import { getModel } from "../src/models.js";
-import { streamSimple } from "../src/stream.js";
-import type { Tool } from "../src/types.js";
+import { getModel } from "../src/models";
+import { streamSimple } from "../src/stream";
+import type { Tool } from "../src/types";
 
 const mockState = vi.hoisted(() => ({ lastParams: undefined as unknown }));
 

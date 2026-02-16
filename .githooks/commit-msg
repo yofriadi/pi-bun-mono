@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+msg_file="${1:?commit message file required}"
+
+subject="$(sed -n '1{/^#/d;/^[[:space:]]*$/d;p;q;}' "$msg_file")"
+if [[ -z "$subject" ]]; then
+	echo "commit-msg: empty commit subject" >&2
+	exit 1
+fi
+
+commit_type=""
+if [[ "$subject" =~ ^fork\([a-zA-Z0-9._/-]+\):[[:space:]].+ ]]; then
+	commit_type="fork"
+elif [[ "$subject" =~ ^sync\(upstream\):[[:space:]]merge[[:space:]]upstream/main[[:space:]]@[[:space:]][0-9a-f]{7,40}$ ]]; then
+	commit_type="sync"
+else
+	cat >&2 <<'EOF'
+commit-msg: subject must match one of:
+  fork(<area>): <summary>
+  sync(upstream): merge upstream/main @ <sha>
+EOF
+	exit 1
+fi
+
+trailers="$(git interpret-trailers --parse < "$msg_file")"
+
+get_trailer() {
+	local key="$1"
+	printf '%s\n' "$trailers" | awk -F': ' -v key="$key" '$1==key {val=$2} END{print val}'
+}
+
+fork_only_raw="$(get_trailer "Fork-Only")"
+upstream_ref_raw="$(get_trailer "Upstream-Ref")"
+parity_impact_raw="$(get_trailer "Parity-Impact")"
+
+if [[ -z "$fork_only_raw" || -z "$upstream_ref_raw" || -z "$parity_impact_raw" ]]; then
+	echo "commit-msg: missing required trailers (Fork-Only, Upstream-Ref, Parity-Impact)" >&2
+	exit 1
+fi
+
+fork_only="$(printf '%s' "$fork_only_raw" | tr '[:upper:]' '[:lower:]')"
+upstream_ref="$(printf '%s' "$upstream_ref_raw" | tr '[:upper:]' '[:lower:]')"
+parity_impact="$(printf '%s' "$parity_impact_raw" | tr '[:upper:]' '[:lower:]')"
+
+if [[ "$parity_impact" != "none" && "$parity_impact" != "documented" ]]; then
+	echo "commit-msg: Parity-Impact must be one of: none, documented" >&2
+	exit 1
+fi
+
+if [[ "$commit_type" == "fork" ]]; then
+	if [[ "$fork_only" != "yes" ]]; then
+		echo "commit-msg: fork(...) commits must have 'Fork-Only: yes'" >&2
+		exit 1
+	fi
+	if [[ "$upstream_ref" != "none" ]]; then
+		echo "commit-msg: fork(...) commits must have 'Upstream-Ref: none'" >&2
+		exit 1
+	fi
+fi
+
+if [[ "$commit_type" == "sync" ]]; then
+	if [[ "$fork_only" != "no" ]]; then
+		echo "commit-msg: sync(upstream) commits must have 'Fork-Only: no'" >&2
+		exit 1
+	fi
+	if ! [[ "$upstream_ref" =~ ^[0-9a-f]{7,40}$ ]]; then
+		echo "commit-msg: sync(upstream) commits must have Upstream-Ref as a commit sha" >&2
+		exit 1
+	fi
+fi
+
+exit 0

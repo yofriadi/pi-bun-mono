@@ -3,8 +3,8 @@
  */
 
 import type { AgentTool, AgentToolUpdateCallback } from "@mariozechner/pi-agent-core";
-import type { ExtensionRunner } from "./runner.js";
-import type { RegisteredTool, ToolCallEventResult } from "./types.js";
+import type { ExtensionRunner } from "./runner";
+import type { RegisteredTool, ToolCallEventResult } from "./types";
 
 /**
  * Wrap a RegisteredTool into an AgentTool.

@@ -14,12 +14,12 @@ import {
 	truncateToWidth,
 	visibleWidth,
 } from "@mariozechner/pi-tui";
-import { KeybindingsManager } from "../../../core/keybindings.js";
-import type { SessionInfo, SessionListProgress } from "../../../core/session-manager.js";
-import { theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
-import { appKey, appKeyHint, keyHint } from "./keybinding-hints.js";
-import { filterAndSortSessions, hasSessionName, type NameFilter, type SortMode } from "./session-selector-search.js";
+import { KeybindingsManager } from "../../../core/keybindings";
+import type { SessionInfo, SessionListProgress } from "../../../core/session-manager";
+import { theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
+import { appKey, appKeyHint, keyHint } from "./keybinding-hints";
+import { filterAndSortSessions, hasSessionName, type NameFilter, type SortMode } from "./session-selector-search";
 
 type SessionScope = "current" | "all";
 

@@ -10,8 +10,8 @@ import {
 	normalizeToLF,
 	restoreLineEndings,
 	stripBom,
-} from "./edit-diff.js";
-import { resolveToCwd } from "./path-utils.js";
+} from "./edit-diff";
+import { resolveToCwd } from "./path-utils";
 
 const editSchema = Type.Object({
 	path: Type.String({ description: "Path to the file to edit (relative or absolute)" }),

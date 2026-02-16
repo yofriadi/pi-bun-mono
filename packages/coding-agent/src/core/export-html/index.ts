@@ -1,11 +1,11 @@
 import type { AgentState } from "@mariozechner/pi-agent-core";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { basename, join } from "path";
-import { APP_NAME, getExportTemplateDir } from "../../config.js";
-import { getResolvedThemeColors, getThemeExportColors } from "../../modes/interactive/theme/theme.js";
-import type { ToolInfo } from "../extensions/types.js";
-import type { SessionEntry } from "../session-manager.js";
-import { SessionManager } from "../session-manager.js";
+import { APP_NAME, getExportTemplateDir } from "../../config";
+import { getResolvedThemeColors, getThemeExportColors } from "../../modes/interactive/theme/theme";
+import type { ToolInfo } from "../extensions/types";
+import type { SessionEntry } from "../session-manager";
+import { SessionManager } from "../session-manager";
 
 /**
  * Interface for rendering custom tools to HTML.

@@ -1,13 +1,13 @@
-import { clearApiProviders, registerApiProvider } from "../api-registry.js";
-import { streamBedrock, streamSimpleBedrock } from "./amazon-bedrock.js";
-import { streamAnthropic, streamSimpleAnthropic } from "./anthropic.js";
-import { streamAzureOpenAIResponses, streamSimpleAzureOpenAIResponses } from "./azure-openai-responses.js";
-import { streamGoogle, streamSimpleGoogle } from "./google.js";
-import { streamGoogleGeminiCli, streamSimpleGoogleGeminiCli } from "./google-gemini-cli.js";
-import { streamGoogleVertex, streamSimpleGoogleVertex } from "./google-vertex.js";
-import { streamOpenAICodexResponses, streamSimpleOpenAICodexResponses } from "./openai-codex-responses.js";
-import { streamOpenAICompletions, streamSimpleOpenAICompletions } from "./openai-completions.js";
-import { streamOpenAIResponses, streamSimpleOpenAIResponses } from "./openai-responses.js";
+import { clearApiProviders, registerApiProvider } from "../api-registry";
+import { streamBedrock, streamSimpleBedrock } from "./amazon-bedrock";
+import { streamAnthropic, streamSimpleAnthropic } from "./anthropic";
+import { streamAzureOpenAIResponses, streamSimpleAzureOpenAIResponses } from "./azure-openai-responses";
+import { streamGoogle, streamSimpleGoogle } from "./google";
+import { streamGoogleGeminiCli, streamSimpleGoogleGeminiCli } from "./google-gemini-cli";
+import { streamGoogleVertex, streamSimpleGoogleVertex } from "./google-vertex";
+import { streamOpenAICodexResponses, streamSimpleOpenAICodexResponses } from "./openai-codex-responses";
+import { streamOpenAICompletions, streamSimpleOpenAICompletions } from "./openai-completions";
+import { streamOpenAIResponses, streamSimpleOpenAIResponses } from "./openai-responses";
 
 export function registerBuiltInApiProviders(): void {
 	registerApiProvider({

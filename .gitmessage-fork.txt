@@ -1,0 +1,15 @@
+# Fork commit format:
+#   fork(<area>): <summary>
+# or:
+#   sync(upstream): merge upstream/main @ <sha>
+#
+# Why:
+# - <why this change is needed>
+#
+# Validation:
+# - <command and key result>
+#
+# Required trailers:
+# Fork-Only: yes
+# Upstream-Ref: none
+# Parity-Impact: none

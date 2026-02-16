@@ -1,12 +1,7 @@
 import { beforeAll, describe, expect, test } from "vitest";
-import type {
-	ModelChangeEntry,
-	SessionEntry,
-	SessionMessageEntry,
-	SessionTreeNode,
-} from "../src/core/session-manager.js";
-import { TreeSelectorComponent } from "../src/modes/interactive/components/tree-selector.js";
-import { initTheme } from "../src/modes/interactive/theme/theme.js";
+import type { ModelChangeEntry, SessionEntry, SessionMessageEntry, SessionTreeNode } from "../src/core/session-manager";
+import { TreeSelectorComponent } from "../src/modes/interactive/components/tree-selector";
+import { initTheme } from "../src/modes/interactive/theme/theme";
 
 beforeAll(() => {
 	initTheme("dark");

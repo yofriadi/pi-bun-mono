@@ -3,10 +3,10 @@ import type { ImageContent, TextContent } from "@mariozechner/pi-ai";
 import { type Static, Type } from "@sinclair/typebox";
 import { constants } from "fs";
 import { access as fsAccess, readFile as fsReadFile } from "fs/promises";
-import { formatDimensionNote, resizeImage } from "../../utils/image-resize.js";
-import { detectSupportedImageMimeTypeFromFile } from "../../utils/mime.js";
-import { resolveReadPath } from "./path-utils.js";
-import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize, type TruncationResult, truncateHead } from "./truncate.js";
+import { formatDimensionNote, resizeImage } from "../../utils/image-resize";
+import { detectSupportedImageMimeTypeFromFile } from "../../utils/mime";
+import { resolveReadPath } from "./path-utils";
+import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize, type TruncationResult, truncateHead } from "./truncate";
 
 const readSchema = Type.Object({
 	path: Type.String({ description: "Path to the file to read (relative or absolute)" }),
@@ -34,7 +34,12 @@ export interface ReadOperations {
 }
 
 const defaultReadOperations: ReadOperations = {
-	readFile: (path) => fsReadFile(path),
+	readFile: async (path) => {
+		if (typeof Bun !== "undefined") {
+			return Buffer.from(await Bun.file(path).arrayBuffer());
+		}
+		return fsReadFile(path);
+	},
 	access: (path) => fsAccess(path, constants.R_OK),
 	detectImageMimeType: detectSupportedImageMimeTypeFromFile,
 };

@@ -1,7 +1,7 @@
 import { spawnSync } from "child_process";
 
-import { clipboard } from "./clipboard-native.js";
-import { loadPhoton } from "./photon.js";
+import { clipboard } from "./clipboard-native";
+import { loadPhoton } from "./photon";
 
 export type ClipboardImage = {
 	bytes: Uint8Array;

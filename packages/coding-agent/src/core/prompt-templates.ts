@@ -1,8 +1,8 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "fs";
 import { homedir } from "os";
 import { basename, isAbsolute, join, resolve, sep } from "path";
-import { CONFIG_DIR_NAME, getPromptsDir } from "../config.js";
-import { parseFrontmatter } from "../utils/frontmatter.js";
+import { CONFIG_DIR_NAME, getPromptsDir } from "../config";
+import { parseFrontmatter } from "../utils/frontmatter";
 
 /**
  * Represents a prompt template loaded from a markdown file

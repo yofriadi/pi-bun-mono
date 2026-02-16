@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getModel, supportsXhigh } from "../src/models.js";
+import { getModel, supportsXhigh } from "../src/models";
 
 describe("supportsXhigh", () => {
 	it("returns true for Anthropic Opus 4.6 on anthropic-messages API", () => {

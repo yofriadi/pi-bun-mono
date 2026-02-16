@@ -1,6 +1,6 @@
 import { Container, type SelectItem, SelectList } from "@mariozechner/pi-tui";
-import { getSelectListTheme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
+import { getSelectListTheme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
 
 /**
  * Component that renders a show images selector with borders

@@ -14,12 +14,12 @@ import {
 	truncateToWidth,
 	visibleWidth,
 } from "@mariozechner/pi-tui";
-import { CONFIG_DIR_NAME } from "../../../config.js";
-import type { PathMetadata, ResolvedPaths, ResolvedResource } from "../../../core/package-manager.js";
-import type { PackageSource, SettingsManager } from "../../../core/settings-manager.js";
-import { theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
-import { rawKeyHint } from "./keybinding-hints.js";
+import { CONFIG_DIR_NAME } from "../../../config";
+import type { PathMetadata, ResolvedPaths, ResolvedResource } from "../../../core/package-manager";
+import type { PackageSource, SettingsManager } from "../../../core/settings-manager";
+import { theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
+import { rawKeyHint } from "./keybinding-hints";
 
 type ResourceType = "extensions" | "skills" | "prompts" | "themes";
 

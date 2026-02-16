@@ -1,9 +1,9 @@
 import type { AssistantMessage, Model, ToolResultMessage, UserMessage } from "@mariozechner/pi-ai";
 import { getModel } from "@mariozechner/pi-ai";
 import { describe, expect, it } from "vitest";
-import { Agent } from "../src/index.js";
-import { hasBedrockCredentials } from "./bedrock-utils.js";
-import { calculateTool } from "./utils/calculate.js";
+import { Agent } from "../src/index";
+import { hasBedrockCredentials } from "./bedrock-utils";
+import { calculateTool } from "./utils/calculate";
 
 async function basicPrompt(model: Model<any>) {
 	const agent = new Agent({

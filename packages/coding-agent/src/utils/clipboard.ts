@@ -1,6 +1,6 @@
 import { execSync, spawn } from "child_process";
 import { platform } from "os";
-import { isWaylandSession } from "./clipboard-image.js";
+import { isWaylandSession } from "./clipboard-image";
 
 export function copyToClipboard(text: string): void {
 	// Always emit OSC 52 - works over SSH/mosh, harmless locally

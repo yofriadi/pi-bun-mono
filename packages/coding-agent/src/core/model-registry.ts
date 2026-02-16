@@ -21,9 +21,9 @@ import { type Static, Type } from "@sinclair/typebox";
 import AjvModule from "ajv";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
-import { getAgentDir } from "../config.js";
-import type { AuthStorage } from "./auth-storage.js";
-import { clearConfigValueCache, resolveConfigValue, resolveHeaders } from "./resolve-config-value.js";
+import { getAgentDir } from "../config";
+import type { AuthStorage } from "./auth-storage";
+import { clearConfigValueCache, resolveConfigValue, resolveHeaders } from "./resolve-config-value";
 
 const Ajv = (AjvModule as any).default || AjvModule;
 

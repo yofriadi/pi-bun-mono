@@ -9,7 +9,7 @@ import {
 } from "@mariozechner/pi-tui";
 import { existsSync, readFileSync } from "fs";
 import { join } from "path";
-import { getAgentDir } from "../config.js";
+import { getAgentDir } from "../config";
 
 /**
  * Application-level actions (coding agent specific).

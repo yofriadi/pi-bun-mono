@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import type { SessionInfo } from "../src/core/session-manager.js";
-import { SessionSelectorComponent } from "../src/modes/interactive/components/session-selector.js";
-import { initTheme } from "../src/modes/interactive/theme/theme.js";
+import type { SessionInfo } from "../src/core/session-manager";
+import { SessionSelectorComponent } from "../src/modes/interactive/components/session-selector";
+import { initTheme } from "../src/modes/interactive/theme/theme";
 
 async function flushPromises(): Promise<void> {
 	await new Promise<void>((resolve) => {

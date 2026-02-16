@@ -7,8 +7,8 @@
  */
 
 import type { Server } from "node:http";
-import { generatePKCE } from "./pkce.js";
-import type { OAuthCredentials, OAuthLoginCallbacks, OAuthProviderInterface } from "./types.js";
+import { generatePKCE } from "./pkce";
+import type { OAuthCredentials, OAuthLoginCallbacks, OAuthProviderInterface } from "./types";
 
 type AntigravityCredentials = OAuthCredentials & {
 	projectId: string;
@@ -115,7 +115,7 @@ async function startCallbackServer(): Promise<CallbackServerInfo> {
 					cancelled = true;
 				},
 				waitForCode: async () => {
-					const sleep = () => new Promise((r) => setTimeout(r, 100));
+					const sleep = () => new Promise<void>((resolve) => setTimeout(resolve, 100));
 					while (!result && !cancelled) {
 						await sleep();
 					}

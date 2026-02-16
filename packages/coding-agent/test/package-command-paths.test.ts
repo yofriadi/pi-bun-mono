@@ -2,8 +2,8 @@ import { mkdirSync, readFileSync, realpathSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ENV_AGENT_DIR } from "../src/config.js";
-import { main } from "../src/main.js";
+import { ENV_AGENT_DIR } from "../src/config";
+import { main } from "../src/main";
 
 describe("package commands", () => {
 	let tempDir: string;

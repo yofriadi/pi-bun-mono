@@ -9,11 +9,11 @@ import {
 	Text,
 	type TUI,
 } from "@mariozechner/pi-tui";
-import type { ModelRegistry } from "../../../core/model-registry.js";
-import type { SettingsManager } from "../../../core/settings-manager.js";
-import { theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
-import { keyHint } from "./keybinding-hints.js";
+import type { ModelRegistry } from "../../../core/model-registry";
+import type { SettingsManager } from "../../../core/settings-manager";
+import { theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
+import { keyHint } from "./keybinding-hints";
 
 interface ModelItem {
 	provider: string;

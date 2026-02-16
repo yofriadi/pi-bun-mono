@@ -13,8 +13,8 @@ import {
 	createBranchSummaryMessage,
 	createCompactionSummaryMessage,
 	createCustomMessage,
-} from "../messages.js";
-import type { CompactionEntry, SessionEntry } from "../session-manager.js";
+} from "../messages";
+import type { CompactionEntry, SessionEntry } from "../session-manager";
 import {
 	computeFileLists,
 	createFileOps,
@@ -23,7 +23,7 @@ import {
 	formatFileOperations,
 	SUMMARIZATION_SYSTEM_PROMPT,
 	serializeConversation,
-} from "./utils.js";
+} from "./utils";
 
 // ============================================================================
 // File Operation Tracking

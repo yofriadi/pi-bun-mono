@@ -1,4 +1,4 @@
-import { loadPhoton } from "./photon.js";
+import { loadPhoton } from "./photon";
 
 /**
  * Convert image to PNG format for terminal display.

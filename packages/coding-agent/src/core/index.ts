@@ -10,10 +10,10 @@ export {
 	type ModelCycleResult,
 	type PromptOptions,
 	type SessionStats,
-} from "./agent-session.js";
-export { type BashExecutorOptions, type BashResult, executeBash, executeBashWithOperations } from "./bash-executor.js";
-export type { CompactionResult } from "./compaction/index.js";
-export { createEventBus, type EventBus, type EventBusController } from "./event-bus.js";
+} from "./agent-session";
+export { type BashExecutorOptions, type BashResult, executeBash, executeBashWithOperations } from "./bash-executor";
+export type { CompactionResult } from "./compaction/index";
+export { createEventBus, type EventBus, type EventBusController } from "./event-bus";
 
 // Extensions system
 export {
@@ -58,4 +58,4 @@ export {
 	type TurnEndEvent,
 	type TurnStartEvent,
 	wrapToolsWithExtensions,
-} from "./extensions/index.js";
+} from "./extensions/index";

@@ -1,5 +1,5 @@
-import { getEditorKeybindings } from "../keybindings.js";
-import { Loader } from "./loader.js";
+import { getEditorKeybindings } from "../keybindings";
+import { Loader } from "./loader";
 
 /**
  * Loader that can be cancelled with Escape.

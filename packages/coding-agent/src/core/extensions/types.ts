@@ -37,25 +37,25 @@ import type {
 	TUI,
 } from "@mariozechner/pi-tui";
 import type { Static, TSchema } from "@sinclair/typebox";
-import type { Theme } from "../../modes/interactive/theme/theme.js";
-import type { BashResult } from "../bash-executor.js";
-import type { CompactionPreparation, CompactionResult } from "../compaction/index.js";
-import type { EventBus } from "../event-bus.js";
-import type { ExecOptions, ExecResult } from "../exec.js";
-import type { ReadonlyFooterDataProvider } from "../footer-data-provider.js";
-import type { KeybindingsManager } from "../keybindings.js";
-import type { CustomMessage } from "../messages.js";
-import type { ModelRegistry } from "../model-registry.js";
+import type { Theme } from "../../modes/interactive/theme/theme";
+import type { BashResult } from "../bash-executor";
+import type { CompactionPreparation, CompactionResult } from "../compaction/index";
+import type { EventBus } from "../event-bus";
+import type { ExecOptions, ExecResult } from "../exec";
+import type { ReadonlyFooterDataProvider } from "../footer-data-provider";
+import type { KeybindingsManager } from "../keybindings";
+import type { CustomMessage } from "../messages";
+import type { ModelRegistry } from "../model-registry";
 import type {
 	BranchSummaryEntry,
 	CompactionEntry,
 	ReadonlySessionManager,
 	SessionEntry,
 	SessionManager,
-} from "../session-manager.js";
-import type { SlashCommandInfo } from "../slash-commands.js";
-import type { BashOperations } from "../tools/bash.js";
-import type { EditToolDetails } from "../tools/edit.js";
+} from "../session-manager";
+import type { SlashCommandInfo } from "../slash-commands";
+import type { BashOperations } from "../tools/bash";
+import type { EditToolDetails } from "../tools/edit";
 import type {
 	BashToolDetails,
 	BashToolInput,
@@ -69,11 +69,11 @@ import type {
 	ReadToolDetails,
 	ReadToolInput,
 	WriteToolInput,
-} from "../tools/index.js";
+} from "../tools/index";
 
-export type { ExecOptions, ExecResult } from "../exec.js";
+export type { ExecOptions, ExecResult } from "../exec";
 export type { AgentToolResult, AgentToolUpdateCallback };
-export type { AppAction, KeybindingsManager } from "../keybindings.js";
+export type { AppAction, KeybindingsManager } from "../keybindings";
 
 // ============================================================================
 // UI Context

@@ -1,8 +1,8 @@
-import { getEditorKeybindings } from "../keybindings.js";
-import { KillRing } from "../kill-ring.js";
-import { type Component, CURSOR_MARKER, type Focusable } from "../tui.js";
-import { UndoStack } from "../undo-stack.js";
-import { getSegmenter, isPunctuationChar, isWhitespaceChar, visibleWidth } from "../utils.js";
+import { getEditorKeybindings } from "../keybindings";
+import { KillRing } from "../kill-ring";
+import { type Component, CURSOR_MARKER, type Focusable } from "../tui";
+import { UndoStack } from "../undo-stack";
+import { getSegmenter, isPunctuationChar, isWhitespaceChar, visibleWidth } from "../utils";
 
 const segmenter = getSegmenter();
 

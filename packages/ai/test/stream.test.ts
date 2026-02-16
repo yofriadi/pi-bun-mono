@@ -4,16 +4,16 @@ import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { getModel } from "../src/models.js";
-import { complete, stream } from "../src/stream.js";
-import type { Api, Context, ImageContent, Model, StreamOptions, Tool, ToolResultMessage } from "../src/types.js";
+import { getModel } from "../src/models";
+import { complete, stream } from "../src/stream";
+import type { Api, Context, ImageContent, Model, StreamOptions, Tool, ToolResultMessage } from "../src/types";
 
 type StreamOptionsWithExtras = StreamOptions & Record<string, unknown>;
 
-import { StringEnum } from "../src/utils/typebox-helpers.js";
-import { hasAzureOpenAICredentials, resolveAzureDeploymentName } from "./azure-utils.js";
-import { hasBedrockCredentials } from "./bedrock-utils.js";
-import { resolveApiKey } from "./oauth.js";
+import { StringEnum } from "../src/utils/typebox-helpers";
+import { hasAzureOpenAICredentials, resolveAzureDeploymentName } from "./azure-utils";
+import { hasBedrockCredentials } from "./bedrock-utils";
+import { resolveApiKey } from "./oauth";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

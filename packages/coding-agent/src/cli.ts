@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
  * CLI entry point for the refactored coding agent.
  * Uses main.ts with AgentSession and new mode modules.
@@ -7,6 +7,6 @@
  */
 process.title = "pi";
 
-import { main } from "./main.js";
+import { main } from "./main";
 
 main(process.argv.slice(2));

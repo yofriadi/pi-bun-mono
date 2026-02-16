@@ -24,8 +24,8 @@
 import type { AssistantMessage } from "@mariozechner/pi-ai";
 import { getModels } from "@mariozechner/pi-ai";
 import { describe, expect, it } from "vitest";
-import { Agent } from "../src/index.js";
-import { hasBedrockCredentials } from "./bedrock-utils.js";
+import { Agent } from "../src/index";
+import { hasBedrockCredentials } from "./bedrock-utils";
 
 // =============================================================================
 // Known Issue Categories

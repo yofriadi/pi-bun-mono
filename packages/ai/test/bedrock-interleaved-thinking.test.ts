@@ -1,10 +1,10 @@
 import { Type } from "@sinclair/typebox";
 import { describe, expect, it } from "vitest";
-import { getModel } from "../src/models.js";
-import { complete } from "../src/stream.js";
-import type { Context, StopReason, Tool, ToolCall, ToolResultMessage } from "../src/types.js";
-import { StringEnum } from "../src/utils/typebox-helpers.js";
-import { hasBedrockCredentials } from "./bedrock-utils.js";
+import { getModel } from "../src/models";
+import { complete } from "../src/stream";
+import type { Context, StopReason, Tool, ToolCall, ToolResultMessage } from "../src/types";
+import { StringEnum } from "../src/utils/typebox-helpers";
+import { hasBedrockCredentials } from "./bedrock-utils";
 
 const calculatorSchema = Type.Object({
 	a: Type.Number({ description: "First number" }),

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { convertMessages } from "../src/providers/google-shared.js";
-import type { Context, Model } from "../src/types.js";
+import { convertMessages } from "../src/providers/google-shared";
+import type { Context, Model } from "../src/types";
 
 describe("google-shared convertMessages", () => {
 	it("converts unsigned tool calls to text for Gemini 3", () => {

@@ -1,8 +1,8 @@
 import { getOAuthProviders, type OAuthProviderInterface } from "@mariozechner/pi-ai";
 import { Container, getEditorKeybindings, Spacer, TruncatedText } from "@mariozechner/pi-tui";
-import type { AuthStorage } from "../../../core/auth-storage.js";
-import { theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
+import type { AuthStorage } from "../../../core/auth-storage";
+import { theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
 
 /**
  * Component that renders an OAuth provider selector

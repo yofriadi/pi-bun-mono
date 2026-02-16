@@ -3,8 +3,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { OpenAICompletionsCompat } from "@mariozechner/pi-ai";
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
-import { AuthStorage } from "../src/core/auth-storage.js";
-import { clearApiKeyCache, ModelRegistry } from "../src/core/model-registry.js";
+import { AuthStorage } from "../src/core/auth-storage";
+import { clearApiKeyCache, ModelRegistry } from "../src/core/model-registry";
 
 describe("ModelRegistry", () => {
 	let tempDir: string;

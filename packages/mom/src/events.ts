@@ -2,8 +2,8 @@ import { Cron } from "croner";
 import { existsSync, type FSWatcher, mkdirSync, readdirSync, statSync, unlinkSync, watch } from "fs";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import * as log from "./log.js";
-import type { SlackBot, SlackEvent } from "./slack.js";
+import * as log from "./log";
+import type { SlackBot, SlackEvent } from "./slack";
 
 // ============================================================================
 // Event Types
@@ -370,7 +370,7 @@ export class EventsWatcher {
 	}
 
 	private sleep(ms: number): Promise<void> {
-		return new Promise((resolve) => setTimeout(resolve, ms));
+		return Bun.sleep(ms);
 	}
 }
 
