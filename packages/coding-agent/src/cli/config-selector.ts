@@ -3,10 +3,10 @@
  */
 
 import { ProcessTerminal, TUI } from "@mariozechner/pi-tui";
-import type { ResolvedPaths } from "../core/package-manager.js";
-import type { SettingsManager } from "../core/settings-manager.js";
-import { ConfigSelectorComponent } from "../modes/interactive/components/config-selector.js";
-import { initTheme, stopThemeWatcher } from "../modes/interactive/theme/theme.js";
+import type { ResolvedPaths } from "../core/package-manager";
+import type { SettingsManager } from "../core/settings-manager";
+import { ConfigSelectorComponent } from "../modes/interactive/components/config-selector";
+import { initTheme, stopThemeWatcher } from "../modes/interactive/theme/theme";
 
 export interface ConfigSelectorOptions {
 	resolvedPaths: ResolvedPaths;

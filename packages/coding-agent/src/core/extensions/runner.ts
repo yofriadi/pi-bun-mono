@@ -5,11 +5,11 @@
 import type { AgentMessage } from "@mariozechner/pi-agent-core";
 import type { ImageContent, Model } from "@mariozechner/pi-ai";
 import type { KeyId } from "@mariozechner/pi-tui";
-import { type Theme, theme } from "../../modes/interactive/theme/theme.js";
-import type { ResourceDiagnostic } from "../diagnostics.js";
-import type { KeyAction, KeybindingsConfig } from "../keybindings.js";
-import type { ModelRegistry } from "../model-registry.js";
-import type { SessionManager } from "../session-manager.js";
+import { type Theme, theme } from "../../modes/interactive/theme/theme";
+import type { ResourceDiagnostic } from "../diagnostics";
+import type { KeyAction, KeybindingsConfig } from "../keybindings";
+import type { ModelRegistry } from "../model-registry";
+import type { SessionManager } from "../session-manager";
 import type {
 	BeforeAgentStartEvent,
 	BeforeAgentStartEventResult,
@@ -47,7 +47,7 @@ import type {
 	ToolResultEventResult,
 	UserBashEvent,
 	UserBashEventResult,
-} from "./types.js";
+} from "./types";
 
 // Keybindings for these actions cannot be overridden by extensions
 const RESERVED_ACTIONS_FOR_EXTENSION_CONFLICTS: ReadonlyArray<KeyAction> = [

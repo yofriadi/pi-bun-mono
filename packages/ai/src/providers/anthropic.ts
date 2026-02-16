@@ -4,8 +4,8 @@ import type {
 	MessageCreateParamsStreaming,
 	MessageParam,
 } from "@anthropic-ai/sdk/resources/messages.js";
-import { getEnvApiKey } from "../env-api-keys.js";
-import { calculateCost } from "../models.js";
+import { getEnvApiKey } from "../env-api-keys";
+import { calculateCost } from "../models";
 import type {
 	Api,
 	AssistantMessage,
@@ -23,14 +23,14 @@ import type {
 	Tool,
 	ToolCall,
 	ToolResultMessage,
-} from "../types.js";
-import { AssistantMessageEventStream } from "../utils/event-stream.js";
-import { parseStreamingJson } from "../utils/json-parse.js";
-import { sanitizeSurrogates } from "../utils/sanitize-unicode.js";
+} from "../types";
+import { AssistantMessageEventStream } from "../utils/event-stream";
+import { parseStreamingJson } from "../utils/json-parse";
+import { sanitizeSurrogates } from "../utils/sanitize-unicode";
 
-import { buildCopilotDynamicHeaders, hasCopilotVisionInput } from "./github-copilot-headers.js";
-import { adjustMaxTokensForThinking, buildBaseOptions } from "./simple-options.js";
-import { transformMessages } from "./transform-messages.js";
+import { buildCopilotDynamicHeaders, hasCopilotVisionInput } from "./github-copilot-headers";
+import { adjustMaxTokensForThinking, buildBaseOptions } from "./simple-options";
+import { transformMessages } from "./transform-messages";
 
 /**
  * Resolve cache retention preference.
@@ -218,22 +218,18 @@ export const streamAnthropic: StreamFunction<"anthropic-messages", AnthropicOpti
 
 		try {
 			const apiKey = options?.apiKey ?? getEnvApiKey(model.provider) ?? "";
-
-			let copilotDynamicHeaders: Record<string, string> | undefined;
-			if (model.provider === "github-copilot") {
-				const hasImages = hasCopilotVisionInput(context.messages);
-				copilotDynamicHeaders = buildCopilotDynamicHeaders({
-					messages: context.messages,
-					hasImages,
-				});
-			}
-
+			const copilotHeaders =
+				model.provider === "github-copilot"
+					? buildCopilotDynamicHeaders({
+							messages: context.messages,
+							hasImages: hasCopilotVisionInput(context.messages),
+						})
+					: undefined;
 			const { client, isOAuthToken } = createClient(
 				model,
 				apiKey,
 				options?.interleavedThinking ?? true,
-				options?.headers,
-				copilotDynamicHeaders,
+				mergeHeaders(copilotHeaders, options?.headers),
 			);
 			const params = buildParams(model, context, isOAuthToken, options);
 			options?.onPayload?.(params);
@@ -480,7 +476,7 @@ export const streamSimpleAnthropic: StreamFunction<"anthropic-messages", SimpleS
 };
 
 function isOAuthToken(apiKey: string): boolean {
-	return apiKey.includes("sk-ant-oat");
+	return apiKey.includes("sk-ant-oat") || apiKey.startsWith("tid_");
 }
 
 function createClient(
@@ -488,77 +484,57 @@ function createClient(
 	apiKey: string,
 	interleavedThinking: boolean,
 	optionsHeaders?: Record<string, string>,
-	dynamicHeaders?: Record<string, string>,
 ): { client: Anthropic; isOAuthToken: boolean } {
-	// Copilot: Bearer auth, selective betas (no fine-grained-tool-streaming)
-	if (model.provider === "github-copilot") {
-		const betaFeatures: string[] = [];
-		if (interleavedThinking) {
-			betaFeatures.push("interleaved-thinking-2025-05-14");
-		}
-
-		const client = new Anthropic({
-			apiKey: null,
-			authToken: apiKey,
-			baseURL: model.baseUrl,
-			dangerouslyAllowBrowser: true,
-			defaultHeaders: mergeHeaders(
-				{
-					accept: "application/json",
-					"anthropic-dangerous-direct-browser-access": "true",
-					...(betaFeatures.length > 0 ? { "anthropic-beta": betaFeatures.join(",") } : {}),
-				},
-				model.headers,
-				dynamicHeaders,
-				optionsHeaders,
-			),
-		});
-
-		return { client, isOAuthToken: false };
+	const betaFeatures: string[] = [];
+	if (model.provider !== "github-copilot") {
+		betaFeatures.push("fine-grained-tool-streaming-2025-05-14");
 	}
-
-	const betaFeatures = ["fine-grained-tool-streaming-2025-05-14"];
 	if (interleavedThinking) {
 		betaFeatures.push("interleaved-thinking-2025-05-14");
 	}
 
-	// OAuth: Bearer auth, Claude Code identity headers
-	if (isOAuthToken(apiKey)) {
+	const oauthToken = isOAuthToken(apiKey);
+	if (oauthToken) {
+		// Stealth mode: Mimic Claude Code's headers exactly
+		const oauthBeta = ["claude-code-20250219", "oauth-2025-04-20", ...betaFeatures].join(",");
+		const defaultHeaders = mergeHeaders(
+			{
+				accept: "application/json",
+				"anthropic-dangerous-direct-browser-access": "true",
+				"anthropic-beta": oauthBeta,
+				"user-agent": `claude-cli/${claudeCodeVersion} (external, cli)`,
+				"x-app": "cli",
+			},
+			model.headers,
+			optionsHeaders,
+		);
+
 		const client = new Anthropic({
 			apiKey: null,
 			authToken: apiKey,
 			baseURL: model.baseUrl,
+			defaultHeaders,
 			dangerouslyAllowBrowser: true,
-			defaultHeaders: mergeHeaders(
-				{
-					accept: "application/json",
-					"anthropic-dangerous-direct-browser-access": "true",
-					"anthropic-beta": `claude-code-20250219,oauth-2025-04-20,${betaFeatures.join(",")}`,
-					"user-agent": `claude-cli/${claudeCodeVersion} (external, cli)`,
-					"x-app": "cli",
-				},
-				model.headers,
-				optionsHeaders,
-			),
 		});
 
 		return { client, isOAuthToken: true };
 	}
 
-	// API key auth
+	const defaultHeaders = mergeHeaders(
+		{
+			accept: "application/json",
+			"anthropic-dangerous-direct-browser-access": "true",
+			"anthropic-beta": betaFeatures.join(","),
+		},
+		model.headers,
+		optionsHeaders,
+	);
+
 	const client = new Anthropic({
 		apiKey,
 		baseURL: model.baseUrl,
 		dangerouslyAllowBrowser: true,
-		defaultHeaders: mergeHeaders(
-			{
-				accept: "application/json",
-				"anthropic-dangerous-direct-browser-access": "true",
-				"anthropic-beta": betaFeatures.join(","),
-			},
-			model.headers,
-			optionsHeaders,
-		),
+		defaultHeaders,
 	});
 
 	return { client, isOAuthToken: false };
@@ -627,13 +603,6 @@ function buildParams(
 				type: "enabled",
 				budget_tokens: options.thinkingBudgetTokens || 1024,
 			};
-		}
-	}
-
-	if (options?.metadata) {
-		const userId = options.metadata.user_id;
-		if (typeof userId === "string") {
-			params.metadata = { user_id: userId };
 		}
 	}
 

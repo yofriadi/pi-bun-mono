@@ -12,8 +12,8 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { DefaultPackageManager } from "../src/core/package-manager.js";
-import { SettingsManager } from "../src/core/settings-manager.js";
+import { DefaultPackageManager } from "../src/core/package-manager";
+import { SettingsManager } from "../src/core/settings-manager";
 
 // Helper to run git commands in a directory
 function git(args: string[], cwd: string): string {
@@ -54,7 +54,7 @@ describe("DefaultPackageManager git update", () => {
 	let packageManager: DefaultPackageManager;
 
 	// Git source that maps to our installed directory structure
-	const gitSource = "github.com/test/extension";
+	const gitSource = "git:github.com/test/extension";
 
 	beforeEach(() => {
 		tempDir = join(tmpdir(), `git-update-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);

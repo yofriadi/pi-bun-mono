@@ -8,8 +8,8 @@ import type {
 	ChatCompletionMessageParam,
 	ChatCompletionToolMessageParam,
 } from "openai/resources/chat/completions.js";
-import { getEnvApiKey } from "../env-api-keys.js";
-import { calculateCost, supportsXhigh } from "../models.js";
+import { getEnvApiKey } from "../env-api-keys";
+import { calculateCost, supportsXhigh } from "../models";
 import type {
 	AssistantMessage,
 	Context,
@@ -25,13 +25,12 @@ import type {
 	Tool,
 	ToolCall,
 	ToolResultMessage,
-} from "../types.js";
-import { AssistantMessageEventStream } from "../utils/event-stream.js";
-import { parseStreamingJson } from "../utils/json-parse.js";
-import { sanitizeSurrogates } from "../utils/sanitize-unicode.js";
-import { buildCopilotDynamicHeaders, hasCopilotVisionInput } from "./github-copilot-headers.js";
-import { buildBaseOptions, clampReasoning } from "./simple-options.js";
-import { transformMessages } from "./transform-messages.js";
+} from "../types";
+import { AssistantMessageEventStream } from "../utils/event-stream";
+import { parseStreamingJson } from "../utils/json-parse";
+import { sanitizeSurrogates } from "../utils/sanitize-unicode";
+import { buildBaseOptions, clampReasoning } from "./simple-options";
+import { transformMessages } from "./transform-messages";
 
 /**
  * Normalize tool call ID for Mistral.
@@ -129,7 +128,7 @@ export const streamOpenAICompletions: StreamFunction<"openai-completions", OpenA
 							partial: output,
 						});
 					} else if (block.type === "toolCall") {
-						block.arguments = parseStreamingJson(block.partialArgs);
+						block.arguments = JSON.parse(block.partialArgs || "{}");
 						delete block.partialArgs;
 						stream.push({
 							type: "toolcall_end",
@@ -360,12 +359,28 @@ function createClient(
 
 	const headers = { ...model.headers };
 	if (model.provider === "github-copilot") {
-		const hasImages = hasCopilotVisionInput(context.messages);
-		const copilotHeaders = buildCopilotDynamicHeaders({
-			messages: context.messages,
-			hasImages,
+		// Copilot expects X-Initiator to indicate whether the request is user-initiated
+		// or agent-initiated (e.g. follow-up after assistant/tool messages). If there is
+		// no prior message, default to user-initiated.
+		const messages = context.messages || [];
+		const lastMessage = messages[messages.length - 1];
+		const isAgentCall = lastMessage ? lastMessage.role !== "user" : false;
+		headers["X-Initiator"] = isAgentCall ? "agent" : "user";
+		headers["Openai-Intent"] = "conversation-edits";
+
+		// Copilot requires this header when sending images
+		const hasImages = messages.some((msg) => {
+			if (msg.role === "user" && Array.isArray(msg.content)) {
+				return msg.content.some((c) => c.type === "image");
+			}
+			if (msg.role === "toolResult" && Array.isArray(msg.content)) {
+				return msg.content.some((c) => c.type === "image");
+			}
+			return false;
 		});
-		Object.assign(headers, copilotHeaders);
+		if (hasImages) {
+			headers["Copilot-Vision-Request"] = "true";
+		}
 	}
 
 	// Merge options headers last so they can override defaults
@@ -508,6 +523,10 @@ export function convertMessages(
 		}
 
 		if (model.provider === "openai") return id.length > 40 ? id.slice(0, 40) : id;
+		// Copilot Claude models route to Claude backend which requires Anthropic ID format
+		if (model.provider === "github-copilot" && model.id.toLowerCase().includes("claude")) {
+			return id.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 64);
+		}
 		return id;
 	};
 

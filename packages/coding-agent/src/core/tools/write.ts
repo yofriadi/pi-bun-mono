@@ -2,7 +2,7 @@ import type { AgentTool } from "@mariozechner/pi-agent-core";
 import { type Static, Type } from "@sinclair/typebox";
 import { mkdir as fsMkdir, writeFile as fsWriteFile } from "fs/promises";
 import { dirname } from "path";
-import { resolveToCwd } from "./path-utils.js";
+import { resolveToCwd } from "./path-utils";
 
 const writeSchema = Type.Object({
 	path: Type.String({ description: "Path to the file to write (relative or absolute)" }),
@@ -23,7 +23,13 @@ export interface WriteOperations {
 }
 
 const defaultWriteOperations: WriteOperations = {
-	writeFile: (path, content) => fsWriteFile(path, content, "utf-8"),
+	writeFile: async (path, content) => {
+		if (typeof Bun !== "undefined") {
+			await Bun.write(path, content);
+		} else {
+			await fsWriteFile(path, content);
+		}
+	},
 	mkdir: (dir) => fsMkdir(dir, { recursive: true }).then(() => {}),
 };
 

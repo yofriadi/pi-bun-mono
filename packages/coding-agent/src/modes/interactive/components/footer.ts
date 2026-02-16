@@ -1,7 +1,7 @@
 import { type Component, truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
-import type { AgentSession } from "../../../core/agent-session.js";
-import type { ReadonlyFooterDataProvider } from "../../../core/footer-data-provider.js";
-import { theme } from "../theme/theme.js";
+import type { AgentSession } from "../../../core/agent-session";
+import type { ReadonlyFooterDataProvider } from "../../../core/footer-data-provider";
+import { theme } from "../theme/theme";
 
 /**
  * Sanitize text for display in a single-line status.

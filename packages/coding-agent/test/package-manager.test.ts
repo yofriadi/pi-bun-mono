@@ -1,9 +1,9 @@
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { DefaultPackageManager, type ProgressEvent, type ResolvedResource } from "../src/core/package-manager.js";
-import { SettingsManager } from "../src/core/settings-manager.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { DefaultPackageManager, type ProgressEvent, type ResolvedResource } from "../src/core/package-manager";
+import { SettingsManager } from "../src/core/settings-manager";
 
 // Helper to check if a resource is enabled
 const isEnabled = (r: ResolvedResource, pathMatch: string, matchFn: "endsWith" | "includes" = "endsWith") =>
@@ -253,12 +253,14 @@ Content`,
 			const events: ProgressEvent[] = [];
 			packageManager.setProgressCallback((event) => events.push(event));
 
-			// Use public install method which emits progress events
+			const runCommandSpy = vi
+				.spyOn(packageManager as any, "runCommand")
+				.mockRejectedValue(new Error("mock install failure"));
+
 			try {
 				await packageManager.install("npm:nonexistent-package@1.0.0");
-			} catch {
-				// Expected to fail - package doesn't exist
-			}
+			} catch {}
+			runCommandSpy.mockRestore();
 
 			// Should have emitted start event before failure
 			expect(events.some((e) => e.type === "start" && e.action === "install")).toBe(true);
@@ -267,18 +269,10 @@ Content`,
 		});
 
 		it("should recognize github URLs without git: prefix", async () => {
-			const events: ProgressEvent[] = [];
-			packageManager.setProgressCallback((event) => events.push(event));
-
-			// This should be parsed as a git source, not throw "unsupported"
-			try {
-				await packageManager.install("https://github.com/nonexistent/repo");
-			} catch {
-				// Expected to fail - repo doesn't exist
-			}
-
-			// Should have attempted clone, not thrown unsupported error
-			expect(events.some((e) => e.type === "start" && e.action === "install")).toBe(true);
+			const parsed = (packageManager as any).parseSource("https://github.com/nonexistent/repo");
+			expect(parsed.type).toBe("git");
+			expect(parsed.host).toBe("github.com");
+			expect(parsed.path).toBe("nonexistent/repo");
 		});
 
 		it("should parse package source types from docs examples", () => {
@@ -1004,7 +998,7 @@ Content`,
 			// Main entry point
 			writeFileSync(
 				join(pkgDir, "extensions", "subagent", "index.ts"),
-				`import { helper } from "./agents.js";
+				`import { helper } from "./agents";
 export default function(api) { api.registerTool({ name: "test", description: "test", execute: async () => helper() }); }`,
 			);
 			// Helper module (should NOT be loaded as standalone extension)
@@ -1060,7 +1054,7 @@ export default function(api) { api.registerTool({ name: "test", description: "te
 			// Subdirectory with index.ts + helpers
 			writeFileSync(
 				join(pkgDir, "extensions", "complex", "index.ts"),
-				"import { a } from './a.js'; export default function(api) {}",
+				"import { a } from './a'; export default function(api) {}",
 			);
 			writeFileSync(join(pkgDir, "extensions", "complex", "a.ts"), "export const a = 1;");
 			writeFileSync(join(pkgDir, "extensions", "complex", "b.ts"), "export const b = 2;");

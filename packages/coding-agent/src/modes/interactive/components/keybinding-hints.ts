@@ -3,8 +3,8 @@
  */
 
 import { type EditorAction, getEditorKeybindings, type KeyId } from "@mariozechner/pi-tui";
-import type { AppAction, KeybindingsManager } from "../../../core/keybindings.js";
-import { theme } from "../theme/theme.js";
+import type { AppAction, KeybindingsManager } from "../../../core/keybindings";
+import { theme } from "../theme/theme";
 
 /**
  * Format keys array as display string (e.g., ["ctrl+c", "escape"] -> "ctrl+c/escape").

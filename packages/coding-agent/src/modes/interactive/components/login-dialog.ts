@@ -1,9 +1,9 @@
 import { getOAuthProviders } from "@mariozechner/pi-ai";
 import { Container, type Focusable, getEditorKeybindings, Input, Spacer, Text, type TUI } from "@mariozechner/pi-tui";
 import { exec } from "child_process";
-import { theme } from "../theme/theme.js";
-import { DynamicBorder } from "./dynamic-border.js";
-import { keyHint } from "./keybinding-hints.js";
+import { theme } from "../theme/theme";
+import { DynamicBorder } from "./dynamic-border";
+import { keyHint } from "./keybinding-hints";
 
 /**
  * Login dialog component - replaces editor during OAuth login flow

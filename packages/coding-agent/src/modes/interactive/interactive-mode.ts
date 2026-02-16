@@ -43,61 +43,54 @@ import {
 	visibleWidth,
 } from "@mariozechner/pi-tui";
 import { spawn, spawnSync } from "child_process";
-import {
-	APP_NAME,
-	getAuthPath,
-	getDebugLogPath,
-	getShareViewerUrl,
-	getUpdateInstruction,
-	VERSION,
-} from "../../config.js";
-import { type AgentSession, type AgentSessionEvent, parseSkillBlock } from "../../core/agent-session.js";
-import type { CompactionResult } from "../../core/compaction/index.js";
+import { APP_NAME, getAuthPath, getDebugLogPath, getShareViewerUrl, getUpdateInstruction, VERSION } from "../../config";
+import { type AgentSession, type AgentSessionEvent, parseSkillBlock } from "../../core/agent-session";
+import type { CompactionResult } from "../../core/compaction/index";
 import type {
 	ExtensionContext,
 	ExtensionRunner,
 	ExtensionUIContext,
 	ExtensionUIDialogOptions,
 	ExtensionWidgetOptions,
-} from "../../core/extensions/index.js";
-import { FooterDataProvider, type ReadonlyFooterDataProvider } from "../../core/footer-data-provider.js";
-import { type AppAction, KeybindingsManager } from "../../core/keybindings.js";
-import { createCompactionSummaryMessage } from "../../core/messages.js";
-import { resolveModelScope } from "../../core/model-resolver.js";
-import type { ResourceDiagnostic } from "../../core/resource-loader.js";
-import { type SessionContext, SessionManager } from "../../core/session-manager.js";
-import { BUILTIN_SLASH_COMMANDS } from "../../core/slash-commands.js";
-import type { TruncationResult } from "../../core/tools/truncate.js";
-import { getChangelogPath, getNewEntries, parseChangelog } from "../../utils/changelog.js";
-import { copyToClipboard } from "../../utils/clipboard.js";
-import { extensionForImageMimeType, readClipboardImage } from "../../utils/clipboard-image.js";
-import { ensureTool } from "../../utils/tools-manager.js";
-import { ArminComponent } from "./components/armin.js";
-import { AssistantMessageComponent } from "./components/assistant-message.js";
-import { BashExecutionComponent } from "./components/bash-execution.js";
-import { BorderedLoader } from "./components/bordered-loader.js";
-import { BranchSummaryMessageComponent } from "./components/branch-summary-message.js";
-import { CompactionSummaryMessageComponent } from "./components/compaction-summary-message.js";
-import { CustomEditor } from "./components/custom-editor.js";
-import { CustomMessageComponent } from "./components/custom-message.js";
-import { DaxnutsComponent } from "./components/daxnuts.js";
-import { DynamicBorder } from "./components/dynamic-border.js";
-import { ExtensionEditorComponent } from "./components/extension-editor.js";
-import { ExtensionInputComponent } from "./components/extension-input.js";
-import { ExtensionSelectorComponent } from "./components/extension-selector.js";
-import { FooterComponent } from "./components/footer.js";
-import { appKey, appKeyHint, editorKey, keyHint, rawKeyHint } from "./components/keybinding-hints.js";
-import { LoginDialogComponent } from "./components/login-dialog.js";
-import { ModelSelectorComponent } from "./components/model-selector.js";
-import { OAuthSelectorComponent } from "./components/oauth-selector.js";
-import { ScopedModelsSelectorComponent } from "./components/scoped-models-selector.js";
-import { SessionSelectorComponent } from "./components/session-selector.js";
-import { SettingsSelectorComponent } from "./components/settings-selector.js";
-import { SkillInvocationMessageComponent } from "./components/skill-invocation-message.js";
-import { ToolExecutionComponent } from "./components/tool-execution.js";
-import { TreeSelectorComponent } from "./components/tree-selector.js";
-import { UserMessageComponent } from "./components/user-message.js";
-import { UserMessageSelectorComponent } from "./components/user-message-selector.js";
+} from "../../core/extensions/index";
+import { FooterDataProvider, type ReadonlyFooterDataProvider } from "../../core/footer-data-provider";
+import { type AppAction, KeybindingsManager } from "../../core/keybindings";
+import { createCompactionSummaryMessage } from "../../core/messages";
+import { resolveModelScope } from "../../core/model-resolver";
+import type { ResourceDiagnostic } from "../../core/resource-loader";
+import { type SessionContext, SessionManager } from "../../core/session-manager";
+import { BUILTIN_SLASH_COMMANDS } from "../../core/slash-commands";
+import type { TruncationResult } from "../../core/tools/truncate";
+import { getChangelogPath, getNewEntries, parseChangelog } from "../../utils/changelog";
+import { copyToClipboard } from "../../utils/clipboard";
+import { extensionForImageMimeType, readClipboardImage } from "../../utils/clipboard-image";
+import { ensureTool } from "../../utils/tools-manager";
+import { ArminComponent } from "./components/armin";
+import { AssistantMessageComponent } from "./components/assistant-message";
+import { BashExecutionComponent } from "./components/bash-execution";
+import { BorderedLoader } from "./components/bordered-loader";
+import { BranchSummaryMessageComponent } from "./components/branch-summary-message";
+import { CompactionSummaryMessageComponent } from "./components/compaction-summary-message";
+import { CustomEditor } from "./components/custom-editor";
+import { CustomMessageComponent } from "./components/custom-message";
+import { DaxnutsComponent } from "./components/daxnuts";
+import { DynamicBorder } from "./components/dynamic-border";
+import { ExtensionEditorComponent } from "./components/extension-editor";
+import { ExtensionInputComponent } from "./components/extension-input";
+import { ExtensionSelectorComponent } from "./components/extension-selector";
+import { FooterComponent } from "./components/footer";
+import { appKey, appKeyHint, editorKey, keyHint, rawKeyHint } from "./components/keybinding-hints";
+import { LoginDialogComponent } from "./components/login-dialog";
+import { ModelSelectorComponent } from "./components/model-selector";
+import { OAuthSelectorComponent } from "./components/oauth-selector";
+import { ScopedModelsSelectorComponent } from "./components/scoped-models-selector";
+import { SessionSelectorComponent } from "./components/session-selector";
+import { SettingsSelectorComponent } from "./components/settings-selector";
+import { SkillInvocationMessageComponent } from "./components/skill-invocation-message";
+import { ToolExecutionComponent } from "./components/tool-execution";
+import { TreeSelectorComponent } from "./components/tree-selector";
+import { UserMessageComponent } from "./components/user-message";
+import { UserMessageSelectorComponent } from "./components/user-message-selector";
 import {
 	getAvailableThemes,
 	getAvailableThemesWithPaths,
@@ -112,7 +105,7 @@ import {
 	Theme,
 	type ThemeColor,
 	theme,
-} from "./theme/theme.js";
+} from "./theme/theme";
 
 /** Interface for components that can be expanded/collapsed */
 interface Expandable {

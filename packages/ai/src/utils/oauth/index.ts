@@ -13,7 +13,7 @@
 import "../http-proxy.js";
 
 // Anthropic
-export { anthropicOAuthProvider, loginAnthropic, refreshAnthropicToken } from "./anthropic.js";
+export { anthropicOAuthProvider, loginAnthropic, refreshAnthropicToken } from "./anthropic";
 // GitHub Copilot
 export {
 	getGitHubCopilotBaseUrl,
@@ -21,26 +21,26 @@ export {
 	loginGitHubCopilot,
 	normalizeDomain,
 	refreshGitHubCopilotToken,
-} from "./github-copilot.js";
+} from "./github-copilot";
 // Google Antigravity
-export { antigravityOAuthProvider, loginAntigravity, refreshAntigravityToken } from "./google-antigravity.js";
+export { antigravityOAuthProvider, loginAntigravity, refreshAntigravityToken } from "./google-antigravity";
 // Google Gemini CLI
-export { geminiCliOAuthProvider, loginGeminiCli, refreshGoogleCloudToken } from "./google-gemini-cli.js";
+export { geminiCliOAuthProvider, loginGeminiCli, refreshGoogleCloudToken } from "./google-gemini-cli";
 // OpenAI Codex (ChatGPT OAuth)
-export { loginOpenAICodex, openaiCodexOAuthProvider, refreshOpenAICodexToken } from "./openai-codex.js";
+export { loginOpenAICodex, openaiCodexOAuthProvider, refreshOpenAICodexToken } from "./openai-codex";
 
-export * from "./types.js";
+export * from "./types";
 
 // ============================================================================
 // Provider Registry
 // ============================================================================
 
-import { anthropicOAuthProvider } from "./anthropic.js";
-import { githubCopilotOAuthProvider } from "./github-copilot.js";
-import { antigravityOAuthProvider } from "./google-antigravity.js";
-import { geminiCliOAuthProvider } from "./google-gemini-cli.js";
-import { openaiCodexOAuthProvider } from "./openai-codex.js";
-import type { OAuthCredentials, OAuthProviderId, OAuthProviderInfo, OAuthProviderInterface } from "./types.js";
+import { anthropicOAuthProvider } from "./anthropic";
+import { githubCopilotOAuthProvider } from "./github-copilot";
+import { antigravityOAuthProvider } from "./google-antigravity";
+import { geminiCliOAuthProvider } from "./google-gemini-cli";
+import { openaiCodexOAuthProvider } from "./openai-codex";
+import type { OAuthCredentials, OAuthProviderId, OAuthProviderInfo, OAuthProviderInterface } from "./types";
 
 const oauthProviderRegistry = new Map<string, OAuthProviderInterface>([
 	[anthropicOAuthProvider.id, anthropicOAuthProvider],

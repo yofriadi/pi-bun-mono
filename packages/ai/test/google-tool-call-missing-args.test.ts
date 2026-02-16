@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { streamGoogleGeminiCli } from "../src/providers/google-gemini-cli.js";
-import type { Context, Model, ToolCall } from "../src/types.js";
+import { streamGoogleGeminiCli } from "../src/providers/google-gemini-cli";
+import type { Context, Model, ToolCall } from "../src/types";
 
 const emptySchema = Type.Object({});
 
@@ -58,7 +58,7 @@ describe("google providers tool call missing args", () => {
 			});
 		});
 
-		global.fetch = fetchMock as typeof fetch;
+		global.fetch = fetchMock as unknown as typeof fetch;
 
 		const model: Model<"google-gemini-cli"> = {
 			id: "gemini-2.5-flash",

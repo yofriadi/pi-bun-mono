@@ -1,7 +1,7 @@
 import "./providers/register-builtins.js";
 import "./utils/http-proxy.js";
 
-import { getApiProvider } from "./api-registry.js";
+import { getApiProvider } from "./api-registry";
 import type {
 	Api,
 	AssistantMessage,
@@ -11,9 +11,9 @@ import type {
 	ProviderStreamOptions,
 	SimpleStreamOptions,
 	StreamOptions,
-} from "./types.js";
+} from "./types";
 
-export { getEnvApiKey } from "./env-api-keys.js";
+export { getEnvApiKey } from "./env-api-keys";
 
 function resolveApiProvider(api: Api) {
 	const provider = getApiProvider(api);

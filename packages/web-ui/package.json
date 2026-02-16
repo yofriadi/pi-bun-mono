@@ -1,6 +1,6 @@
 {
 	"name": "@mariozechner/pi-web-ui",
-	"version": "0.52.12",
+	"version": "0.52.9",
 	"description": "Reusable web UI components for AI chat interfaces powered by @mariozechner/pi-ai",
 	"type": "module",
 	"main": "dist/index.js",
@@ -11,17 +11,21 @@
 	},
 	"scripts": {
 		"clean": "rm -rf dist",
-		"build": "tsgo -p tsconfig.build.json && tailwindcss -i ./src/app.css -o ./dist/app.css --minify",
+		"build": "tsc -p tsconfig.build.json && tailwindcss -i ./src/app.css -o ./dist/app.css --minify",
 		"dev": "concurrently --names \"build,example\" --prefix-colors \"cyan,green\" \"tsc -p tsconfig.build.json --watch --preserveWatchOutput\" \"tailwindcss -i ./src/app.css -o ./dist/app.css --watch\" \"npm run dev --prefix example\"",
 		"dev:tsc": "concurrently --names \"build\" --prefix-colors \"cyan\" \"tsc -p tsconfig.build.json --watch --preserveWatchOutput\" \"tailwindcss -i ./src/app.css -o ./dist/app.css --watch\"",
 		"check": "biome check --write --error-on-warnings . && tsc --noEmit && cd example && biome check --write --error-on-warnings . && tsc --noEmit"
 	},
 	"dependencies": {
 		"@lmstudio/sdk": "^1.5.0",
-		"@mariozechner/pi-ai": "^0.52.12",
-		"@mariozechner/pi-tui": "^0.52.12",
+		"@mariozechner/pi-ai": "^0.52.9",
+		"@mariozechner/pi-agent-core": "^0.52.9",
+		"@mariozechner/pi-tui": "^0.52.9",
+		"@sinclair/typebox": "^0.34.41",
 		"docx-preview": "^0.3.7",
+		"highlight.js": "^11.11.1",
 		"jszip": "^3.10.1",
+		"lit": "^3.3.2",
 		"lucide": "^0.544.0",
 		"ollama": "^0.6.0",
 		"pdfjs-dist": "5.4.394",
@@ -35,6 +39,7 @@
 		"@mariozechner/mini-lit": "^0.2.0",
 		"@tailwindcss/cli": "^4.0.0-beta.14",
 		"concurrently": "^9.2.1",
+		"tailwindcss": "^4.1.18",
 		"typescript": "^5.7.3"
 	},
 	"keywords": [
@@ -47,5 +52,8 @@
 		"mini-lit"
 	],
 	"author": "Mario Zechner",
-	"license": "MIT"
+	"license": "MIT",
+	"engines": {
+		"node": ">=20.19.0"
+	}
 }

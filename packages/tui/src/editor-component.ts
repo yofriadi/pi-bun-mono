@@ -1,5 +1,5 @@
-import type { AutocompleteProvider } from "./autocomplete.js";
-import type { Component } from "./tui.js";
+import type { AutocompleteProvider } from "./autocomplete";
+import type { Component } from "./tui";
 
 /**
  * Interface for custom editor components.

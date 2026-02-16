@@ -8,29 +8,29 @@
 import { type ImageContent, modelsAreEqual, supportsXhigh } from "@mariozechner/pi-ai";
 import chalk from "chalk";
 import { createInterface } from "readline";
-import { type Args, parseArgs, printHelp } from "./cli/args.js";
-import { selectConfig } from "./cli/config-selector.js";
-import { processFileArguments } from "./cli/file-processor.js";
-import { listModels } from "./cli/list-models.js";
-import { selectSession } from "./cli/session-picker.js";
-import { APP_NAME, getAgentDir, getModelsPath, VERSION } from "./config.js";
-import { AuthStorage } from "./core/auth-storage.js";
-import { DEFAULT_THINKING_LEVEL } from "./core/defaults.js";
-import { exportFromFile } from "./core/export-html/index.js";
-import type { LoadExtensionsResult } from "./core/extensions/index.js";
-import { KeybindingsManager } from "./core/keybindings.js";
-import { ModelRegistry } from "./core/model-registry.js";
-import { resolveCliModel, resolveModelScope, type ScopedModel } from "./core/model-resolver.js";
-import { DefaultPackageManager } from "./core/package-manager.js";
-import { DefaultResourceLoader } from "./core/resource-loader.js";
-import { type CreateAgentSessionOptions, createAgentSession } from "./core/sdk.js";
-import { SessionManager } from "./core/session-manager.js";
-import { SettingsManager } from "./core/settings-manager.js";
-import { printTimings, time } from "./core/timings.js";
-import { allTools } from "./core/tools/index.js";
-import { runMigrations, showDeprecationWarnings } from "./migrations.js";
-import { InteractiveMode, runPrintMode, runRpcMode } from "./modes/index.js";
-import { initTheme, stopThemeWatcher } from "./modes/interactive/theme/theme.js";
+import { type Args, parseArgs, printHelp } from "./cli/args";
+import { selectConfig } from "./cli/config-selector";
+import { processFileArguments } from "./cli/file-processor";
+import { listModels } from "./cli/list-models";
+import { selectSession } from "./cli/session-picker";
+import { APP_NAME, getAgentDir, getModelsPath, VERSION } from "./config";
+import { AuthStorage } from "./core/auth-storage";
+import { DEFAULT_THINKING_LEVEL } from "./core/defaults";
+import { exportFromFile } from "./core/export-html/index";
+import type { LoadExtensionsResult } from "./core/extensions/index";
+import { KeybindingsManager } from "./core/keybindings";
+import { ModelRegistry } from "./core/model-registry";
+import { resolveModelScope, type ScopedModel } from "./core/model-resolver";
+import { DefaultPackageManager } from "./core/package-manager";
+import { DefaultResourceLoader } from "./core/resource-loader";
+import { type CreateAgentSessionOptions, createAgentSession } from "./core/sdk";
+import { SessionManager } from "./core/session-manager";
+import { SettingsManager } from "./core/settings-manager";
+import { printTimings, time } from "./core/timings";
+import { allTools } from "./core/tools/index";
+import { runMigrations, showDeprecationWarnings } from "./migrations";
+import { InteractiveMode, runPrintMode, runRpcMode } from "./modes/index";
+import { initTheme, stopThemeWatcher } from "./modes/interactive/theme/theme";
 
 /**
  * Read all content from piped stdin.
@@ -92,9 +92,8 @@ Options:
 Examples:
   ${APP_NAME} install npm:@foo/bar
   ${APP_NAME} install git:github.com/user/repo
-  ${APP_NAME} install git:git@github.com:user/repo
   ${APP_NAME} install https://github.com/user/repo
-  ${APP_NAME} install ssh://git@github.com/user/repo
+  ${APP_NAME} install git@github.com:user/repo
   ${APP_NAME} install ./local/path
 `);
 			return;
@@ -410,42 +409,22 @@ function buildSessionOptions(
 	sessionManager: SessionManager | undefined,
 	modelRegistry: ModelRegistry,
 	settingsManager: SettingsManager,
-): { options: CreateAgentSessionOptions; cliThinkingFromModel: boolean } {
+): CreateAgentSessionOptions {
 	const options: CreateAgentSessionOptions = {};
-	let cliThinkingFromModel = false;
 
 	if (sessionManager) {
 		options.sessionManager = sessionManager;
 	}
 
 	// Model from CLI
-	// - supports --provider <name> --model <pattern>
-	// - supports --model <provider>/<pattern>
-	if (parsed.model) {
-		const resolved = resolveCliModel({
-			cliProvider: parsed.provider,
-			cliModel: parsed.model,
-			modelRegistry,
-		});
-		if (resolved.warning) {
-			console.warn(chalk.yellow(`Warning: ${resolved.warning}`));
-		}
-		if (resolved.error) {
-			console.error(chalk.red(resolved.error));
+	if (parsed.provider && parsed.model) {
+		const model = modelRegistry.find(parsed.provider, parsed.model);
+		if (!model) {
+			console.error(chalk.red(`Model ${parsed.provider}/${parsed.model} not found`));
 			process.exit(1);
 		}
-		if (resolved.model) {
-			options.model = resolved.model;
-			// Allow "--model <pattern>:<thinking>" as a shorthand.
-			// Explicit --thinking still takes precedence (applied later).
-			if (!parsed.thinking && resolved.thinkingLevel) {
-				options.thinkingLevel = resolved.thinkingLevel;
-				cliThinkingFromModel = true;
-			}
-		}
-	}
-
-	if (!options.model && scopedModels.length > 0 && !parsed.continue && !parsed.resume) {
+		options.model = model;
+	} else if (scopedModels.length > 0 && !parsed.continue && !parsed.resume) {
 		// Check if saved default is in scoped models - use it if so, otherwise first scoped model
 		const savedProvider = settingsManager.getDefaultProvider();
 		const savedModelId = settingsManager.getDefaultModel();
@@ -497,7 +476,7 @@ function buildSessionOptions(
 		options.tools = parsed.tools.map((name) => allTools[name]);
 	}
 
-	return { options, cliThinkingFromModel };
+	return options;
 }
 
 async function handleConfigCommand(args: string[]): Promise<boolean> {
@@ -671,13 +650,7 @@ export async function main(args: string[]) {
 		sessionManager = SessionManager.open(selectedPath);
 	}
 
-	const { options: sessionOptions, cliThinkingFromModel } = buildSessionOptions(
-		parsed,
-		scopedModels,
-		sessionManager,
-		modelRegistry,
-		settingsManager,
-	);
+	const sessionOptions = buildSessionOptions(parsed, scopedModels, sessionManager, modelRegistry, settingsManager);
 	sessionOptions.authStorage = authStorage;
 	sessionOptions.modelRegistry = modelRegistry;
 	sessionOptions.resourceLoader = resourceLoader;
@@ -685,9 +658,7 @@ export async function main(args: string[]) {
 	// Handle CLI --api-key as runtime override (not persisted)
 	if (parsed.apiKey) {
 		if (!sessionOptions.model) {
-			console.error(
-				chalk.red("--api-key requires a model to be specified via --model, --provider/--model, or --models"),
-			);
+			console.error(chalk.red("--api-key requires a model to be specified via --provider/--model or -m/--models"));
 			process.exit(1);
 		}
 		authStorage.setRuntimeApiKey(sessionOptions.model.provider, parsed.apiKey);
@@ -703,11 +674,9 @@ export async function main(args: string[]) {
 		process.exit(1);
 	}
 
-	// Clamp thinking level to model capabilities for CLI-provided thinking levels.
-	// This covers both --thinking <level> and --model <pattern>:<thinking>.
-	const cliThinkingOverride = parsed.thinking !== undefined || cliThinkingFromModel;
-	if (session.model && cliThinkingOverride) {
-		let effectiveThinking = session.thinkingLevel;
+	// Clamp thinking level to model capabilities (for CLI override case)
+	if (session.model && parsed.thinking) {
+		let effectiveThinking = parsed.thinking;
 		if (!session.model.reasoning) {
 			effectiveThinking = "off";
 		} else if (effectiveThinking === "xhigh" && !supportsXhigh(session.model)) {

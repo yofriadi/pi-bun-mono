@@ -2,7 +2,7 @@ import { mkdtempSync, readdirSync, rmdirSync, unlinkSync, writeFileSync } from "
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { expandPath, resolveReadPath, resolveToCwd } from "../src/core/tools/path-utils.js";
+import { expandPath, resolveReadPath, resolveToCwd } from "../src/core/tools/path-utils";
 
 describe("path-utils", () => {
 	describe("expandPath", () => {

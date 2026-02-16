@@ -4,8 +4,8 @@ import { type Static, Type } from "@sinclair/typebox";
 import { spawn } from "child_process";
 import { readFileSync, statSync } from "fs";
 import path from "path";
-import { ensureTool } from "../../utils/tools-manager.js";
-import { resolveToCwd } from "./path-utils.js";
+import { ensureTool } from "../../utils/tools-manager";
+import { resolveToCwd } from "./path-utils";
 import {
 	DEFAULT_MAX_BYTES,
 	formatSize,
@@ -13,7 +13,7 @@ import {
 	type TruncationResult,
 	truncateHead,
 	truncateLine,
-} from "./truncate.js";
+} from "./truncate";
 
 const grepSchema = Type.Object({
 	pattern: Type.String({ description: "Search pattern (regex or literal string)" }),
